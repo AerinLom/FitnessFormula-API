@@ -3,6 +3,63 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <!-- Image and buttons container -->
+    <div class="position-relative d-inline-block mt-4">
+        <img src="~/images/NewFitnessFormula.png" alt="Fitness Image" class="img-fluid" />
+
+        <!-- Buttons container -->
+        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+            <a href="@Url.Action("Register", "Users")" class="btn btn-dark-gold m-2">Sign Up</a>
+            <a href="@Url.Action("Login", "Users")" class="btn btn-dark-gold m-2">Login</a>
+        </div>
+    </div>
 </div>
+
+<style>
+    body {
+        background-color: black;
+        color: ghostwhite;
+    }
+
+    .btn-dark-gold {
+        background-color: #b8860b;
+        color: black;
+        border: 3px solid white;
+        border-radius: 6px;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+    .position-relative {
+        position: relative;
+    }
+
+    .position-absolute {
+        position: absolute;
+    }
+
+    .bottom-0 {
+        bottom: 0;
+    }
+
+    .start-50 {
+        left: 50%;
+    }
+
+    .translate-middle-x {
+        transform: translateX(-50%);
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .m-2 {
+        margin: 0.5rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+</style>
