@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
-namespace FitnessFormula_API.Models
+namespace FitnessFormulaMVP.Models
 {
-    [Table("userProfile")]
-    public class UserProfile
+    public class UserModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,10 +17,5 @@ namespace FitnessFormula_API.Models
 
         [MaxLength(100)]
         public string? Email { get; set; }
-
-        public string? Preferences { get; set; } // JSON stored as string
-
-        public ICollection<UserWorkout>? UserWorkouts { get; set; }
-        //public ICollection<Session> Sessions { get; set; }
     }
 }

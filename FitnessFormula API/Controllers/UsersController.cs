@@ -26,9 +26,9 @@ namespace FitnessFormula_API.Controllers
             return await _context.UserProfiles.ToListAsync();
         }
 
-        // GET: api/UserProfile/{userId}
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<UserProfile>> GetUserProfile(int userId)
+        // GET: api/UserProfile/ById/{userId}
+        [HttpGet("Id/{userId}")]
+        public async Task<ActionResult<UserProfile>> GetUserProfileByID(int userId)
         {
             try
             {
@@ -50,6 +50,30 @@ namespace FitnessFormula_API.Controllers
             }
         }
 
+        // GET: api/UserProfile/ByUsername/{username}
+        [HttpGet("Username/{username}")]
+        public async Task<ActionResult<UserProfile>> GetUserProfileByUsername(string username)
+        {
+            try
+            {
+                var userProfile = await _context.UserProfiles.FirstOrDefaultAsync(u => u.Username == username);
+
+                if (userProfile == null)
+                {
+                    return NotFound(); // Return 404 if userProfile with specified username is not found
+                }
+
+                return Ok(userProfile); // Return userProfile if found
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                // Example: _logger.LogError(ex, $"Error occurred while fetching UserProfile with username {username}");
+
+                return StatusCode(500, "An error occurred while fetching the user profile."); // Return 500 Internal Server Error for other exceptions
+            }
+        }
+
         // PUT: api/UserProfile/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserProfile(int id, UserProfileInputModel updatedUserProfile)
@@ -66,9 +90,9 @@ namespace FitnessFormula_API.Controllers
             {
                 userProfile.Username = updatedUserProfile.Username;
             }
-            if (updatedUserProfile.PasswordHash != null)
+            if (updatedUserProfile.Password != null)
             {
-                userProfile.PasswordHash = updatedUserProfile.PasswordHash;
+                userProfile.Password = updatedUserProfile.Password;
             }
             if (updatedUserProfile.Email != null)
             {
@@ -113,7 +137,7 @@ namespace FitnessFormula_API.Controllers
                 {
                     UserId = model.UserId,  // Ensure UserId is correctly assigned
                     Username = model.Username,
-                    PasswordHash = model.PasswordHash,
+                    Password = model.Password,
                     Email = model.Email
                     // Other properties as needed
                 });
