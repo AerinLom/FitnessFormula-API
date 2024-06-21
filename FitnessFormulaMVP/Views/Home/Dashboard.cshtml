@@ -1,0 +1,196 @@
+﻿@{
+    ViewData["Title"] = "Success";
+    var username = TempData["Username"] as string; // Retrieve username from TempData
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global reset and styles */
+
+        .search {
+            width: 100%; /* Make search bar full width */
+            padding: 1px;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Add positioning styles below */
+            position: fixed; /* Fix search bar to the top */
+            top: 0; /* Position at the top of the viewport */
+            left: 0; /* Position at the left of the viewport */
+            z-index: 10; /* Set stacking order to appear above other elements */
+        }
+
+
+            .search input {
+                width: 100%;
+                padding: 10px;
+                border-radius: 2px;
+                border: none;
+                font-size: 1em;
+            }
+
+        .container {
+            width: 300%;
+            display: flex;
+            padding: 5px; /* Allow arranging elements side-by-side */
+        }
+
+        .workouts-container {
+            width: 80%; /* Adjust width as needed */
+            margin-left: 40px; /* Corrected margin-left value */
+            height: calc(100vh - 60px); /* Adjusted height calculation */
+
+            border-radius: 10px;
+            overflow-y: auto; /* Enable scrolling if workouts overflow */
+            display: grid;
+            flex-direction: column; /* Arrange children in a column */
+        }
+
+
+        .options {
+            /* Adjust width as needed */
+            width: 25%; /* Set width for left section */
+            /* Adjust height as needed */
+            height: calc(100vh - 80px); /* Adjust height for navigation bar */
+            background-color: rgba(0, 0, 0, 0.8); /* Adjust background color if needed */
+            padding: 10px;
+            border-radius: 10px;
+            display: flex; /* Allow elements vertically */
+            flex-direction: column; /* Stack elements on top */
+            margin-right: 40px;
+        }
+
+        .workout {
+            padding: 100px;
+            text-align: center;
+            background-color: ghostwhite;
+            border-radius: 50px;
+            margin: 20px;
+            color: darkgoldenrod;
+        }
+
+        .options div {
+            /* Adjust width as needed to fit content */
+            width: 100%; /* Make buttons full width within the options section */
+            margin-bottom: 30px; /* Adjust spacing between buttons */
+            color: white;
+            padding: 5px 10px; /* Adjust padding as needed */
+            background-color: rgba(68, 68, 68, 0.9); /* Adjust button background color */
+            border: none; /* Remove default button border */
+            border-radius: 10px; /* Add rounded corners */
+            cursor: pointer; /* Indicate clickable element */
+            text-align: left; /* Align text to the left */
+            white-space: nowrap; /* Prevent text wrapping and overflowing */
+            overflow: hidden; /* Hide any content that overflows */
+            text-overflow: ellipsis; /* Add ellipsis (...) if text overflows button width */
+        }
+
+
+            .options div:hover { /* Button hover effect */
+                background-color: rgba(68, 68, 68, 0.7); /* Adjust hover background color */
+            }
+
+        .workout-actions {
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            gap: 20px; /* Gap between buttons */
+            margin-top: 100px; /* Push to the bottom */
+            margin-bottom: 2px;
+        }
+
+        .workout:hover .workout-actions {
+            opacity: 1; /* Show on hover */
+        }
+
+        .action-button {
+            padding: 8px 16px; /* Padding */
+            background-color: rgba(68, 68, 68, 0.9); /* Background color */
+            color: white; /* Text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+            text-align: center; /* Center text */
+            white-space: nowrap; /* No wrapping */
+            overflow: hidden; /* Hide overflow */
+            text-overflow: ellipsis; /* Ellipsis if overflow */
+        }
+
+            .action-button:hover {
+                background-color: rgba(68, 68, 68, 0.7); /* Hover color */
+            }
+    </style>
+</head>
+<body>
+    <div class="search">
+        <input type="text" placeholder="Search workout...">
+    </div>
+    <div class="container">
+        <div class="options">
+            <div class="categories">
+                <h2>Categories</h2>
+                <!-- Add categories here -->
+            </div>
+            <a asp-controller="User" asp-action="Settings" class="btn btn-primary">Settings</a>
+            <div class="my-workouts">
+                <h2>My Workouts</h2>
+                <!-- Add my workouts here -->
+            </div>
+        </div>
+        <div class="workouts-container">
+            <div class="workout">
+                Workout 1
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+            <div class="workout">
+                Workout 2
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+            <div class="workout">
+                Workout 3
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+            <div class="workout">
+                Workout 4
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+            <div class="workout">
+                Workout 5
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+            <div class="workout">
+                Workout 6
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+            <div class="workout">
+                Workout 7
+                <div class="workout-actions">
+                    <button class="action-button">Save Workout</button>
+                    <button class="action-button">View Workout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

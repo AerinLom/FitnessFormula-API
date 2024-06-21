@@ -1,15 +1,64 @@
 ﻿@model FitnessFormulaMVP.Models.LoginModel
 
 @{
-    ViewData["Title"] = "Successfully Logged In!";
+    ViewData["Title"] = "Not logged In, try again";
 }
 
 <style>
     /* Centering the h1 element */
     h1 {
-        color: yellow;
+        color: darkgoldenrod;
         text-align: center; /* Center-align the text */
     }
+
+    /* Container for logo and button */
+    .container {
+        text-align: center; /* Center-align contents */
+    }
+
+    /* Logo styling */
+    .logo {
+        max-width: 400px; /* Adjust the maximum width of the logo */
+        height: auto; /* Maintain aspect ratio */
+        margin-bottom: 20px; /* Space between logo and button */
+        display: block; /* Ensure the image is displayed as a block element */
+        margin: 0 auto; /* Center the image horizontally */
+    }
+
+    /* Style for the back button */
+    .back-button {
+        display: block; /* Display as block to occupy full width */
+        margin: 20px auto; /* Center the button horizontally with margin */
+        padding: 10px 20px;
+        background-color: rgba(192, 192, 192, 0.5); /* Translucent silver background */
+        color: #333; /* Text color */
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 150px; /* Set a fixed width for the button */
+        transition: background-color 0.3s ease; /* Smooth transition for background color change */
+    }
+
+        .back-button:hover {
+            background-color: rgba(192, 192, 192, 0.8); /* Darker silver on hover */
+        }
 </style>
 
 <h1>Wrong password or username</h1>
+
+<div class="container">
+    <!-- Logo Image -->
+    <img src="~/images/NewFitnessFormula.png" alt="Fitness Formula Logo" class="logo">
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="goBack()">Back to login</button>
+</div>
+
+<script>
+    // JavaScript function to go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+</script>

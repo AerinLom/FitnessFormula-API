@@ -1,0 +1,48 @@
+﻿@model FitnessFormulaMVP.Models.UserModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Settings</title>
+    <style>
+        /* Example CSS for a white container */
+        .settingcontainer {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 600px; /* Adjust width as needed */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: silver;
+            color: #000000;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .back-button:hover {
+                background-color: #cccccc;
+            }
+    </style>
+</head>
+<body>
+    <h1>User Settings</h1>
+
+    <div class="settingcontainer">
+        <p><strong>Username:</strong> @Model.Username</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Password:</strong> @Model.Password</p>
+    </div>
+    <a href="@Url.Action("Dashboard", "Home")" class="back-button">Back</a>
+</body>
+</html>

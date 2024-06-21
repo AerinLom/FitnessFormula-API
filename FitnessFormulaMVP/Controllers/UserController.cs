@@ -84,8 +84,9 @@ namespace FitnessFormulaMVP.Controllers
                     {
                         // Login successful
                         TempData["Username"] = userProfile.Username; // Store username in TempData
+                        HttpContext.Session.SetString("Username", userProfile.Username);
                         TempData["SuccessMessage"] = "Login successful! Welcome to Fitness Formula.";
-                        return RedirectToAction("Privacy", "Home");
+                        return RedirectToAction("Dashboard", "Home");
                     }
                     else
                     {
@@ -104,6 +105,34 @@ namespace FitnessFormulaMVP.Controllers
             ModelState.AddModelError("", "Invalid username or password.");
             return View();
         }
+
+        public async Task<IActionResult> Settings()
+        {
+            var username = HttpContext.Session.GetString("Username");
+
+            if (string.IsNullOrEmpty(username))
+            {
+                // Handle case where username is not found in session
+                return RedirectToAction("Index", "Home"); // Redirect to home or login page
+            }
+
+            try
+            {
+                var response = await _httpClient.GetAsync($"UserProfile/Username/{username}");
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+                var userProfile = JsonConvert.DeserializeObject<UserModel>(content);
+
+                return View(userProfile); ; // Pass user details to the settings view
+            }
+            catch (HttpRequestException)
+            {
+                ModelState.AddModelError("", "Error while retrieving user details. Please try again later.");
+                return View(); // Return view with error message
+            }
+        }
+
 
     }
 }
