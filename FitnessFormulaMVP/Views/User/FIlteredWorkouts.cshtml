@@ -1,0 +1,11 @@
+﻿@model List<WorkoutModel>
+
+@foreach (var workout in Model)
+{
+    <div class="workout">
+        <h3>@workout.Name</h3>
+        <p><strong>Category:</strong> @workout.Category</p>
+        <p><strong>Difficulty:</strong> @workout.Difficulty</p>
+        <p><strong>Duration:</strong> @workout.Duration minutes</p>
+    </div>
+}

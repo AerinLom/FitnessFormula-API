@@ -1,0 +1,160 @@
+﻿@model FitnessFormulaMVP.Models.WorkoutModel
+
+@{
+    ViewData["Title"] = "View Workout";
+    var username = TempData["Username"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Workout</title>
+    <link rel="stylesheet" href="~/css/styling.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        /* Define any additional styles specific to this view */
+        .workout-details {
+            max-width: 800px; /* Adjust as needed */
+            margin: 100px auto 20px; /* Center align and add margin */
+            padding: 20px;
+            background-color: #f0f0f0; /* Light grey background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .workout-details h2 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+                color: #333; /* Dark grey text */
+            }
+
+            .workout-details p {
+                margin-bottom: 10px;
+                font-size: 1.2rem;
+                color: #666; /* Grey text */
+            }
+
+            .workout-details .exercise-list {
+                margin-top: 10px;
+            }
+
+                .workout-details .exercise-list h3 {
+                    font-size: 1.5rem;
+                    margin-bottom: 10px;
+                    color: #333; /* Dark grey text */
+                }
+
+                .workout-details .exercise-list ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+
+                .workout-details .exercise-list li {
+                    font-size: 1.2rem;
+                    margin-bottom: 5px;
+                    color: #666; /* Grey text */
+                }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <!-- Sidebar content -->
+        <a href="#" class="logo">
+            <img src="~/images/NewFitnessFormula.png" alt="">
+        </a>
+        <div class="profile">
+            <button class="profile-btn">
+                <div class="profile-img">
+                    <img src="~/images/user.jpg" alt="">
+                </div>
+            </button>
+            <div class="name">
+                <h1>@username</h1>
+                <img src="" alt="">
+            </div>
+            <span></span>
+        </div>
+        <div class="about">
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+        <div class="menu">
+            <a asp-controller="Home" asp-action="Dashboard">
+                <span class="icon">
+                    <i class="ri-function-line"></i>
+                </span>
+                Categories
+            </a>
+            <a href="#">
+                <span class="icon">
+                    <i class="ri-run-line"></i>
+                </span>
+                My Workouts
+            </a>
+            <a asp-controller="User" asp-action="Settings">
+                <span class="icon">
+                    <i class="ri-settings-line"></i>
+                </span>
+                Settings
+            </a>
+        </div>
+    </div>
+
+    <div class="main-home">
+        <div class="header">
+            <!-- Header content -->
+            <div class="search">
+                <i class="ri-search-line"></i>
+                <input id="searchInput" type="text" placeholder="Search...">
+                <button onclick="searchWorkouts()">Search</button>
+            </div>
+
+            <div class="header-content">
+                <button class="icon-btn">
+                    <i class="ri-notification-4-line"></i>
+                </button>
+                <i class=""></i>
+                <a asp-controller="User" asp-action="Logout" class="btn">
+                    <i class="ri-home-line"></i>
+                    <div class="btn-text">Logout</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="workout-details">
+            <h2>@Model.Name</h2>
+            <p><strong>Category:</strong> @Model.Category</p>
+            <p><strong>Difficulty:</strong> @Model.Difficulty</p>
+            <p><strong>Duration:</strong> @Model.Duration minutes</p>
+
+            <div class="exercise-list">
+                <h3>Exercises:</h3>
+                <ul>
+                    @foreach (var exercise in Model.Exercises)
+                    {
+                        <li>@exercise.Name - Sets: @exercise.Sets, Reps: @exercise.Reps</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/search.js"></script>
+</body>
+</html>

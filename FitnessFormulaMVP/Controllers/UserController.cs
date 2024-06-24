@@ -133,6 +133,9 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-
+        public async Task<IActionResult> Logout()
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

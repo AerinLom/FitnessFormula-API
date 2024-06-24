@@ -12,7 +12,8 @@ namespace FitnessFormula_API.Data
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Workout> Workout { get; set; }
         public DbSet<UserWorkout> UserWorkouts { get; set; }
-        public DbSet<Session> Sessions { get; set; }
+        public DbSet<Exercises> Exercises { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,10 +25,10 @@ namespace FitnessFormula_API.Data
                 .WithMany(u => u.UserWorkouts)
                 .HasForeignKey(uw => uw.UserId);
 
-            modelBuilder.Entity<UserWorkout>()
-                .HasOne(uw => uw.Workout)
-                .WithMany(w => w.UserWorkouts)
-                .HasForeignKey(uw => uw.WorkoutId);
+            modelBuilder.Entity<Workout>()
+                .HasMany(w => w.Exercises)
+                .WithOne(e => e.Workout)
+                .HasForeignKey(e => e.WorkoutId);
         }
     }
 }
