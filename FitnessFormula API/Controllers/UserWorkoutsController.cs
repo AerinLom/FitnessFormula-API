@@ -19,65 +19,61 @@ namespace FitnessFormula_API.Controllers
             _context = context;
         }
 
-        // GET: api/UserWorkouts/{userId}/Workouts
-        [HttpGet("{userId}/Workouts")]
-        public async Task<ActionResult<IEnumerable<Workout>>> GetUserWorkouts(int userId)
+        [HttpGet("MyWorkouts")]
+        public async Task<IActionResult> GetMyWorkouts(int userId)
         {
-            var user = await _context.UserProfiles
-                .Include(u => u.UserWorkouts)
-                .ThenInclude(uw => uw.Workout)
-                .FirstOrDefaultAsync(u => u.UserId == userId);
-
-            if (user == null)
+            if (userId <= 0)
             {
-                return NotFound("User not found");
+                return BadRequest("Invalid user ID.");
             }
 
-            var workouts = user.UserWorkouts.Select(uw => uw.Workout).ToList();
-            return Ok(workouts);
-        }
-
-        // POST: api/UserWorkouts
-        [HttpPost]
-        public async Task<IActionResult> PostUserWorkout(int userId, int workoutId)
-        {
             try
             {
-                var user = await _context.UserProfiles.FindAsync(userId);
-                if (user == null)
-                {
-                    return NotFound("User not found");
-                }
+                var userWorkouts = await _context.UserWorkouts
+                                                .Include(uw => uw.Workout)
+                                                .Where(uw => uw.UserId == userId)
+                                                .ToListAsync();
 
-                var workout = await _context.Workout.FindAsync(workoutId);
-                if (workout == null)
-                {
-                    return NotFound("Workout not found");
-                }
+                var workouts = userWorkouts.Select(uw => uw.Workout).ToList();
 
-                var existingUserWorkout = await _context.UserWorkouts.FindAsync(userId, workoutId);
-                if (existingUserWorkout != null)
-                {
-                    return Conflict("Workout already exists in user's list");
-                }
+                return Ok(workouts);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as per your application's error handling strategy
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
+
+        [HttpPost]
+        public async Task<IActionResult> SaveWorkout(UserWorkoutDto userWorkoutDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                // Create a new UserWorkout instance with only userId and workoutId
                 var userWorkout = new UserWorkout
                 {
-                    UserId = userId,
-                    WorkoutId = workoutId,
-                    User = user,
-                    Workout = workout
+                    UserId = userWorkoutDto.UserId,
+                    WorkoutId = userWorkoutDto.WorkoutId
                 };
 
                 _context.UserWorkouts.Add(userWorkout);
                 await _context.SaveChangesAsync();
-
-                return Ok("Workout added to user's list successfully");
+                return Ok("Workout saved successfully!");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Failed to add workout to user's list: {ex.Message}");
+                return StatusCode(500, $"Failed to save workout: {ex.Message}");
             }
         }
+
+
+
     }
 }

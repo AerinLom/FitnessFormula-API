@@ -85,6 +85,7 @@ namespace FitnessFormulaMVP.Controllers
                         // Login successful
                         TempData["Username"] = userProfile.Username; // Store username in TempData
                         HttpContext.Session.SetString("Username", userProfile.Username);
+                        HttpContext.Session.SetString("UserId", userProfile.UserId.ToString());
                         TempData["SuccessMessage"] = "Login successful! Welcome to Fitness Formula.";
                         return RedirectToAction("Dashboard", "Home");
                     }

@@ -54,7 +54,7 @@
                     </span>
                     Categories
                 </a>
-                <a href="#">
+            <a asp-controller="Workout" asp-action="MyWorkouts">
                     <span class="icon">
                         <i class="ri-run-line"></i>
                     </span>
@@ -73,8 +73,10 @@
             <div class="header">
             <div class="search">
                 <i class="ri-search-line"></i>
-                <input id="searchInput" type="text" placeholder="Search...">
-                <button onclick="searchWorkouts()">Search</button>
+                <form asp-controller="Workout" asp-action="SearchWorkouts" method="get" style="display: inline;">
+                    <input id="searchInput" type="text" name="workoutName" placeholder="Search..." required>
+                    <button type="submit" class="btn">Search</button>
+                </form>
             </div>
 
             <div id="workoutsList">

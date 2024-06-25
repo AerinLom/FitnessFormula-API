@@ -99,27 +99,45 @@ namespace FitnessFormula_API.Controllers
             return Ok(jsonWorkouts);
         }
 
-        // GET: api/Workouts/search
-        [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Workout>>> SearchWorkoutsByName([FromQuery] string name)
+        // GET: api/Workouts/Search/{WorkoutName}
+        [HttpGet("Search/{workoutName}")]
+        public async Task<ActionResult<IEnumerable<Workout>>> GetWorkoutsByName(string workoutName)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(workoutName))
             {
-                return BadRequest("Search query 'name' cannot be empty.");
+                return BadRequest("Workout name cannot be empty.");
             }
 
-            var workouts = await _context.Workout
-                .Include(w => w.Exercises) // Include if you have related entities
-                .Where(w => w.Name.ToLower().Contains(name.ToLower()))
-                .ToListAsync();
-
-            if (workouts == null || workouts.Count == 0)
+            try
             {
-                return NotFound("No workouts found.");
-            }
+                var workouts = await _context.Workout
+                    .Include(w => w.Exercises)
+                    .Where(w => w.Name.ToLower().Contains(workoutName.ToLower()))
+                    .ToListAsync();
 
-            return Ok(workouts);
+                if (workouts == null || workouts.Count == 0)
+                {
+                    return NotFound("No workouts found.");
+                }
+
+                // Configure JsonSerializerOptions with ReferenceHandler.Preserve
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
+
+                // Serialize workouts with the configured options
+                var jsonWorkouts = JsonSerializer.Serialize(workouts, options);
+
+                return Ok(jsonWorkouts);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateWorkout(int id, [FromBody] Workout updatedWorkout)

@@ -1,0 +1,142 @@
+﻿@model List<FitnessFormulaMVP.Models.WorkoutModel>
+
+@{
+    ViewData["Title"] = "My Workouts";
+    var username = TempData["Username"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessFormula Dashboard</title>
+    <link rel="stylesheet" href="~/css/styling.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        .workout-container {
+            position: absolute;
+            top: 160px;
+            left: 200px;
+            column-gap: 40px;
+            max-height: 680px; /* Adjust maximum height as needed */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 10px; /* Add padding to the container */
+        }
+
+        .workout-tile {
+            background-color: ghostwhite; /* Gold color */
+            color: black; /* Black text */
+            padding: 40px;
+            margin-bottom: 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50vw; /* Make tiles 50% of viewport width */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+            float: left; /* Float tiles to achieve 1 tile per row */
+            clear: both; /* Clear float to avoid overlapping */
+            text-align: center; /* Center align text */
+            text-decoration: none; /* Remove underline from links */
+            display: inline-block; /* Display as inline block to enable sizing */
+        }
+
+            .workout-tile h2 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .workout-tile p {
+                margin-bottom: 5px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <!-- Sidebar content -->
+        <a href="#" class="logo">
+            <img src="~/images/NewFitnessFormula.png" alt="">
+        </a>
+        <div class="profile">
+            <button class="profile-btn">
+                <div class="profile-img">
+                    <img src="~/images/user.jpg" alt="">
+                </div>
+            </button>
+            <div class="name">
+                <h1>@username</h1>
+                <img src="" alt="">
+            </div>
+            <span></span>
+        </div>
+        <div class="about">
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+        <div class="menu">
+            <a asp-controller="Home" asp-action="Dashboard">
+                <span class="icon">
+                    <i class="ri-function-line"></i>
+                </span>
+                Categories
+            </a>
+            <a asp-controller="User" asp-action="Settings">
+                <span class="icon">
+                    <i class="ri-settings-line"></i>
+                </span>
+                Settings
+            </a>
+        </div>
+    </div>
+
+    <div class="main-home">
+        <div class="header">
+
+            <div id="workoutsList" class="workout-container">
+                <!-- Workout tiles will be displayed here -->
+                @foreach (var workout in Model)
+                {
+                    <a href="@Url.Action("ViewMyWorkout", "Workout", new { name = workout.Name })" class="workout-tile">
+                        <h2>@workout.Name</h2>
+                        <p><strong>Category:</strong> @workout.Category</p>
+                        <p><strong>Difficulty:</strong> @workout.Difficulty</p>
+                        <p><strong>Duration:</strong> @workout.Duration minutes</p>
+                    </a>
+                }
+            </div>
+
+            <div class="header-content">
+                <button class="icon-btn">
+                    <i class="ri-notification-4-line"></i>
+                </button>
+                <i class=""></i>
+                <a asp-controller="User" asp-action="Logout" class="btn">
+                    <i class="ri-home-line"></i>
+                    <div class="btn-text">Logout</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="feed">
+            <div class="feed-text">
+                <h2>Strength Workouts</h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/search.js"></script>
+</body>
+</html>
