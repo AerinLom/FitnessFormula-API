@@ -52,7 +52,7 @@
                     <span class="icon">
                         <i class="ri-function-line"></i>
                     </span>
-                    Categories
+                    Home
                 </a>
             <a asp-controller="Workout" asp-action="MyWorkouts">
                     <span class="icon">
@@ -66,6 +66,13 @@
                     </span>
                     Settings
                 </a>
+            <a asp-controller="Workout" asp-action="CreateWorkout">
+                <span class="icon">
+                    <i class="ri-run-line"></i>
+                </span>
+                New Workout
+            </a>
+
             </div>
         </div>
 
@@ -112,15 +119,15 @@
                 <h1>Strength</h1>
                 <img src="~/images/strength.jpg" alt="">
             </a>
-            <a href="~/Home/HIITView" class="post-box">
+            <a asp-controller="Workout" asp-action="HIITView" class="post-box">
                 <h1>HIIT</h1>
                 <img src="~/images/hiit.jpg" alt="">
             </a>
-            <a href="~/Home/FunctionalView" class="post-box">
+            <a asp-controller="Workout" asp-action="FunctionalView" class="post-box">
                 <h1>Functional</h1>
                 <img src="~/images/functional.jpg" alt="">
             </a>
-            <a href="~/Home/FlexibilityView" class="post-box">
+            <a asp-controller="Workout" asp-action="FlexibilityView" class="post-box">
                 <h1>Flexibility</h1>
                 <img src="~/images/flexibility.jpg" alt="">
             </a>

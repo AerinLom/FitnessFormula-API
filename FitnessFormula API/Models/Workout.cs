@@ -19,6 +19,6 @@ namespace FitnessFormula_API.Models
         public string? Difficulty { get; set; }
 
         public int? Duration { get; set; }
-        public ICollection<Exercises>? Exercises { get; set; } = new List<Exercises>();
+        public ICollection<Exercises>? Exercises { get; set; }
     }
 }

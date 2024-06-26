@@ -407,6 +407,7 @@ a.post-box {
     padding: 20px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
+    margin-left: 0px;
 }
 
     .post-box h1 {

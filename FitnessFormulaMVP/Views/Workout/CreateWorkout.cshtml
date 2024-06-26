@@ -1,0 +1,161 @@
+﻿@model FitnessFormulaMVP.Models.WorkoutModel
+
+@{
+    ViewData["Title"] = "Create a Workout";
+    var username = TempData["Username"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessFormula Dashboard</title>
+    <link rel="stylesheet" href="~/css/styling.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="sidebar">
+        <!-- Sidebar content -->
+        <a href="#" class="logo">
+            <img src="~/images/NewFitnessFormula.png" alt="">
+        </a>
+        <div class="profile">
+            <button class="profile-btn">
+                <div class="profile-img">
+                    <img src="~/images/user.jpg" alt="">
+                </div>
+            </button>
+            <div class="name">
+                <h1>@username</h1>
+                <img src="" alt="">
+            </div>
+            <span></span>
+        </div>
+        <div class="about">
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+            <div class="box">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+        <div class="menu">
+            <a asp-controller="Home" asp-action="Dashboard">
+                <span class="icon">
+                    <i class="ri-function-line"></i>
+                </span>
+                Categories
+            </a>
+            <a href="#">
+                <span class="icon">
+                    <i class="ri-run-line"></i>
+                </span>
+                My Workouts
+            </a>
+            <a asp-controller="User" asp-action="Settings">
+                <span class="icon">
+                    <i class="ri-settings-line"></i>
+                </span>
+                Settings
+            </a>
+        </div>
+    </div>
+
+    <div class="main-home">
+        <div class="header">
+            <!-- Header content -->
+            <div class="search">
+                <i class="ri-search-line"></i>
+                <input id="searchInput" type="text" placeholder="Search...">
+                <button onclick="searchWorkouts()">Search</button>
+            </div>
+
+            <div class="header-content">
+                <button class="icon-btn">
+                    <i class="ri-notification-4-line"></i>
+                </button>
+                <i class=""></i>
+                <a asp-controller="User" asp-action="Logout" class="btn">
+                    <i class="ri-home-line"></i>
+                    <div class="btn-text">Logout</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="feed">
+            <div class="feed-text">
+                <h2>Create a Workout</h2>
+            </div>
+        </div>
+
+        <div id="workoutForm" class="container">
+            @using (Html.BeginForm("CreateWorkout", "Workout", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, "Workout Name:")
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Category, "Category:")
+                    @Html.TextBoxFor(model => model.Category, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Difficulty, "Difficulty:")
+                    @Html.TextBoxFor(model => model.Difficulty, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Duration, "Duration (minutes):")
+                    @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Example: dynamic exercise input fields -->
+                <div id="exercises">
+                    <div class="form-group exercise">
+                        <label>Exercise Name:</label>
+                        <input name="Exercises[0].Name" class="form-control" required>
+                        <label>Sets:</label>
+                        <input name="Exercises[0].Sets" type="number" class="form-control" required>
+                        <label>Reps:</label>
+                        <input name="Exercises[0].Reps" type="number" class="form-control" required>
+                    </div>
+                </div>
+
+                <button type="button" onclick="addExercise()" class="btn btn-primary">Add Exercise</button>
+                <button type="submit" class="btn btn-success">Create Workout</button>
+            }
+        </div>
+    </div>
+
+    <script>
+        let exerciseIndex = 0;
+
+        function addExercise() {
+            exerciseIndex++;
+            const exerciseHtml = `
+                                            <div class="form-group exercise">
+                                                <label for="exerciseName">Exercise Name:</label>
+                                                <input type="text" name="Exercises[${exerciseIndex}].Name" class="form-control" required>
+                                                <label for="exerciseSets">Sets:</label>
+                                                <input type="number" name="Exercises[${exerciseIndex}].Sets" class="form-control" required>
+                                                <label for="exerciseReps">Reps:</label>
+                                                <input type="number" name="Exercises[${exerciseIndex}].Reps" class="form-control" required>
+                                            </div>
+                                        `;
+            document.getElementById('exercises').insertAdjacentHTML('beforeend', exerciseHtml);
+        }
+    </script>
+</body>
+</html>

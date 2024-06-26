@@ -15,6 +15,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole(); // Example: Add other logging providers if needed
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

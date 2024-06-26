@@ -32,11 +32,118 @@ namespace FitnessFormulaMVP.Controllers
             return View("NoWorkoutsFound");
         }
 
+        [HttpGet]
+        public IActionResult CreateWorkout()
+        {
+            return View();
+        }
         public async Task<IActionResult> StrengthView()
         {
             try
             {
                 var response = await _httpClient.GetAsync("Workouts/category/Strength");
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Clean up JSON string by unescaping it and trimming excess characters
+                var cleanedContent = Regex.Unescape(content).Trim('"').Replace("\\", "");
+
+                // Deserialize JSON string into List<WorkoutModel> using custom converter
+                var workouts = JsonConvert.DeserializeObject<List<WorkoutModel>>(cleanedContent, new CustomWorkoutConverter());
+
+                return View(workouts);
+            }
+            catch (HttpRequestException)
+            {
+                // Handle HTTP request errors
+                return View("Error");
+            }
+            catch (JsonException)
+            {
+                // Handle JSON parsing errors
+                return View("Error");
+            }
+            catch (Exception)
+            {
+                // Handle other unexpected errors
+                return View("Error");
+            }
+        }
+
+        public async Task<IActionResult> HIITView()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("Workouts/category/HIIT");
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Clean up JSON string by unescaping it and trimming excess characters
+                var cleanedContent = Regex.Unescape(content).Trim('"').Replace("\\", "");
+
+                // Deserialize JSON string into List<WorkoutModel> using custom converter
+                var workouts = JsonConvert.DeserializeObject<List<WorkoutModel>>(cleanedContent, new CustomWorkoutConverter());
+
+                return View(workouts);
+            }
+            catch (HttpRequestException)
+            {
+                // Handle HTTP request errors
+                return View("Error");
+            }
+            catch (JsonException)
+            {
+                // Handle JSON parsing errors
+                return View("Error");
+            }
+            catch (Exception)
+            {
+                // Handle other unexpected errors
+                return View("Error");
+            }
+        }
+
+        public async Task<IActionResult> FlexibilityView()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("Workouts/category/Flexibility");
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Clean up JSON string by unescaping it and trimming excess characters
+                var cleanedContent = Regex.Unescape(content).Trim('"').Replace("\\", "");
+
+                // Deserialize JSON string into List<WorkoutModel> using custom converter
+                var workouts = JsonConvert.DeserializeObject<List<WorkoutModel>>(cleanedContent, new CustomWorkoutConverter());
+
+                return View(workouts);
+            }
+            catch (HttpRequestException)
+            {
+                // Handle HTTP request errors
+                return View("Error");
+            }
+            catch (JsonException)
+            {
+                // Handle JSON parsing errors
+                return View("Error");
+            }
+            catch (Exception)
+            {
+                // Handle other unexpected errors
+                return View("Error");
+            }
+        }
+
+        public async Task<IActionResult> FunctionalView()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("Workouts/category/Functional");
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -290,7 +397,31 @@ namespace FitnessFormulaMVP.Controllers
             }
             return RedirectToAction("Dashboard", "Home");
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateWorkout(WorkoutModel workout)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var json = JsonConvert.SerializeObject(workout);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+                var response = await _httpClient.PostAsync("https://localhost:7076/api/Workouts", content);
+
+                return RedirectToAction("Dashboard", "Home");
+            }
+            catch (HttpRequestException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
 
 
     }

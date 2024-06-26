@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FitnessFormula_API.Data;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 
 namespace FitnessFormula_API.Controllers
 {
@@ -15,10 +16,11 @@ namespace FitnessFormula_API.Controllers
     public class WorkoutsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public WorkoutsController(ApplicationDbContext context)
+        private readonly ILogger<WorkoutsController> _logger;
+        public WorkoutsController(ApplicationDbContext context, ILogger<WorkoutsController> logger)
         {
             _context = context;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         // GET: api/Workouts
@@ -191,30 +193,28 @@ namespace FitnessFormula_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Add the workout object to the context's Workout DbSet
-            _context.Workout.Add(workout);
-
-            // Ensure each exercise is associated with the workout
-            foreach (var exercise in workout.Exercises)
+            try
             {
-                exercise.WorkoutId = workout.WorkoutId;
-                _context.Exercises.Add(exercise);
+                _context.Workout.Add(workout);
+                await _context.SaveChangesAsync();
+
+                // Ensure each exercise is associated with the workout and does not set Id
+                foreach (var exercise in workout.Exercises)
+                {
+                    exercise.WorkoutId = workout.WorkoutId; // Ensure WorkoutId is set correctly
+                    _context.Exercises.Add(exercise);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return CreatedAtRoute("GetWorkout", new { id = workout.WorkoutId }, workout);
             }
-
-            // Save changes to the database
-            await _context.SaveChangesAsync();
-
-            // Optional: Create a minimal workout object for response
-            var responseWorkout = new Workout
+            catch (Exception ex)
             {
-                WorkoutId = workout.WorkoutId,
-                Name = workout.Name
-            };
-
-            return CreatedAtRoute("GetWorkout", new { id = workout.WorkoutId }, responseWorkout);
+                _logger.LogError(ex, "Error creating workout.");
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
         }
-
-
 
         // DELETE: api/Workouts/5
         [HttpDelete("{id}")]

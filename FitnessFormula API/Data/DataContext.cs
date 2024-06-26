@@ -29,6 +29,11 @@ namespace FitnessFormula_API.Data
                 .HasMany(w => w.Exercises)
                 .WithOne(e => e.Workout)
                 .HasForeignKey(e => e.WorkoutId);
+            
+            modelBuilder.Entity<Exercises>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
