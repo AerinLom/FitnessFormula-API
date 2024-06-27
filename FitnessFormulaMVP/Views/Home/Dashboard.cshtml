@@ -48,30 +48,32 @@
                 </div>
             </div>
             <div class="menu">
-                <a href="#" class="active">
-                    <span class="icon">
-                        <i class="ri-function-line"></i>
-                    </span>
-                    Home
-                </a>
+            <a asp-controller="Home" asp-action="Dashboard">
+                <span class="icon">
+                    <i class="ri-home-line"></i>
+                </span>
+                Home
+            </a>
             <a asp-controller="Workout" asp-action="MyWorkouts">
                     <span class="icon">
                         <i class="ri-run-line"></i>
                     </span>
                     My Workouts
-                </a> 
+                </a>
+
+            <a asp-controller="Workout" asp-action="CreateWorkout">
+                <span class="icon">
+                    <i class="ri-add-line"></i>
+                </span>
+                New Workout
+            </a>
+
             <a asp-controller="User" asp-action="Settings">
                     <span class="icon">
                         <i class="ri-settings-line"></i>
                     </span>
                     Settings
                 </a>
-            <a asp-controller="Workout" asp-action="CreateWorkout">
-                <span class="icon">
-                    <i class="ri-run-line"></i>
-                </span>
-                New Workout
-            </a>
 
             </div>
         </div>
@@ -80,9 +82,9 @@
             <div class="header">
             <div class="search">
                 <i class="ri-search-line"></i>
-                <form asp-controller="Workout" asp-action="SearchWorkouts" method="get" style="display: inline;">
-                    <input id="searchInput" type="text" name="workoutName" placeholder="Search..." required>
-                    <button type="submit" class="btn">Search</button>
+                <form asp-controller="Workout" asp-action="SearchWorkouts" method="get" style="display: flex; align-items: center;">
+                    <input id="searchInput" type="text" name="workoutName" placeholder="Search..." required class="search-input">
+                    <button type="submit" class="custom-search-button">Search</button>
                 </form>
             </div>
 

@@ -89,10 +89,18 @@
         <div class="menu">
             <a asp-controller="Home" asp-action="Dashboard">
                 <span class="icon">
-                    <i class="ri-function-line"></i>
+                    <i class="ri-home-line"></i>
                 </span>
-                Categories
+                Home
             </a>
+
+            <a asp-controller="Workout" asp-action="CreateWorkout">
+                <span class="icon">
+                    <i class="ri-add-line"></i>
+                </span>
+                New Workout
+            </a>
+
             <a asp-controller="User" asp-action="Settings">
                 <span class="icon">
                     <i class="ri-settings-line"></i>
@@ -132,7 +140,7 @@
 
         <div class="feed">
             <div class="feed-text">
-                <h2>Strength Workouts</h2>
+                <h2>My Workouts</h2>
             </div>
         </div>
     </div>

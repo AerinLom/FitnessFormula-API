@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-
-*{
+* {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -10,21 +9,21 @@
     text-decoration: none;
 }
 
-body{
+body {
     background: #242424;
     letter-spacing: 0.5px;
     color: #fff;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 3px;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
     background: #1c1c1c;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background: #eee;
 }
 
@@ -42,11 +41,11 @@ body{
     left: 0px;
 }
 
-.logo img{
+.logo img {
     width: 274px;
 }
 
-.profile{
+.profile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -65,9 +64,7 @@ body{
     transition: transform 0.3s ease;
 }
 
-
-
-.profile-img{
+.profile-img {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,20 +73,20 @@ body{
     transition: transform 0.3s ease;
 }
 
-.profile-img img{
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 50%;
-    object-position: center;
-    transition: transform 0.3s ease;
-}
+    .profile-img img {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+        object-position: center;
+        transition: transform 0.3s ease;
+    }
 
 .profile-btn:hover .profile-img img {
     transform: scale(1.1);
 }
 
-.name{
+.name {
     display: flex;
     position: center;
     margin: 1rem 0 0.4rem;
@@ -97,92 +94,91 @@ body{
     margin-left: 24px;
 }
 
-.name h1{
-    font-size: 1.1rem;
-}
+    .name h1 {
+        font-size: 1.1rem;
+    }
 
-.name img{
-    margin-left: 4px;
-    width: 20px;
-    object-fit: cover;
-}
+    .name img {
+        margin-left: 4px;
+        width: 20px;
+        object-fit: cover;
+    }
 
-.about{
+.about {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
 }
 
-.box{
+.box {
     text-align: center;
 }
 
-.box h3{
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-}
+    .box h3 {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #fff;
+    }
 
-.box span{
-    font-size: 0.98rem;
-    font-weight: 0;
-    color: #eee;
-}
+    .box span {
+        font-size: 0.98rem;
+        font-weight: 0;
+        color: #eee;
+    }
 
-.menu{
+.menu {
     margin-top: 15px;
     margin-left: 5px;
 }
 
-.menu a{
-    width: 100%;
-    font-size: 2rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    line-height: 60px;
-}
+    .menu a {
+        width: 100%;
+        font-size: 2rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        line-height: 60px;
+    }
 
-.menu .icon{
-    margin-right: 1rem;
-    font-size: 20px;
-}
+    .menu .icon {
+        margin-right: 1rem;
+        font-size: 20px;
+    }
 
-.menu a:hover,
-.menu .active{
-    color: gold;
-}
+    .menu a:hover,
+    .menu .active {
+        color: gold;
+    }
 
-.menu a:hover::before,
-.menu .active::before{
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 2px;
-    height: 17px;
-    background: #bbff00;
-}
+        .menu a:hover::before,
+        .menu .active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            width: 2px;
+            height: 17px;
+            background: #bbff00;
+        }
 
-.main-home{
+.main-home {
     position: absolute;
     width: calc(100% - 300px);
     left: 300px;
     background: #242424;
     top: 0;
     min-height: 100vh;
-    border-radius: 1rem 0 0 1rem;   
+    border-radius: 1rem 0 0 1rem;
     padding: 20px;
     overflow: hidden;
 }
 
-.header{
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-
-.search{
+.search {
     display: flex;
     align-items: center;
     background: #07070720;
@@ -194,31 +190,45 @@ body{
     margin-left: 300px;
 }
 
-.search input{
+    .search input {
+        border: none;
+        outline: none;
+        background: transparent;
+        margin-left: 7px;
+        text-emphasis-color: gold;
+        color: ghostwhite;
+    }
+
+        .search input::placeholder {
+            color: gold;
+        }
+
+    .search i {
+        font-size: 20px;
+        color: gold;
+    }
+
+.custom-search-button {
+    background: linear-gradient(to right, gold, white);
+    color: black;
     border: none;
-    outline: none;
-    background: transparent;
-    margin-left: 7px;
-    text-emphasis-color: gold;
-    color: ghostwhite;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 10px; /* Adjust the margin as needed */
 }
 
-.search input::placeholder{
-    color: gold;
-}
+    .custom-search-button:hover {
+        background: linear-gradient(to right, white, gold);
+    }
 
-.search i{
-    font-size: 20px;
-    color: gold;
-}
-
-
-.header-content{
+.header-content {
     display: flex;
     align-items: center;
 }
 
-.icon-btn{
+.icon-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -229,22 +239,22 @@ body{
     transition: transform 0.3s ease;
 }
 
-.icon-btn i{
-    font-size: 24px;
-    color: #000;
-}
+    .icon-btn i {
+        font-size: 24px;
+        color: #000;
+    }
 
-.icon-btn:hover{
-    transform: translateY(-2px);
-}
+    .icon-btn:hover {
+        transform: translateY(-2px);
+    }
 
-.header-content i{
+.header-content i {
     color: #fff;
     font-size: 20px;
     margin-left: 1rem;
 }
 
-.header-content .btn{
+.header-content .btn {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -254,52 +264,51 @@ body{
     transition: transform 0.3s ease;
 }
 
-.header-content .btn:hover {
-    transform: translateX(10px);
-    background: gold;
-} 
+    .header-content .btn:hover {
+        transform: translateX(10px);
+        background: gold;
+    }
 
-.header-content .btn i{
-    color: darkgoldenrod;
-    margin-right: 10px;
-}
+    .header-content .btn i {
+        color: darkgoldenrod;
+        margin-right: 10px;
+    }
 
-.btn-text{
+.btn-text {
     color: #fff;
 }
 
-.stories-title{
+.stories-title {
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
 }
 
-.stories-title h1{
-    font-size: 1.8rem;
-    color: #fff;
-    letter-spacing: 1px;
-}
+    .stories-title h1 {
+        font-size: 1.8rem;
+        color: #fff;
+        letter-spacing: 1px;
+    }
 
-.stories-title .btn{
-    display: flex;
-    align-items: center;
-    color: #eee;
-}
+    .stories-title .btn {
+        display: flex;
+        align-items: center;
+        color: #eee;
+    }
 
-.stories-title .btn i{
-    font-size: 24px;
-    margin-right: 10px;
+        .stories-title .btn i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
 
-}
-
-.stories{
+.stories {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 2rem;
 }
 
-.stories-img{
+.stories-img {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -307,60 +316,60 @@ body{
     height: 80px;
     border-radius: 50%;
     object-position: center;
-    border: 2px solid #e2336b;   
+    border: 2px solid #e2336b;
 }
 
-.stories-img img{
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 50%;
-    object-position: center;
-}
+    .stories-img img {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+        object-position: center;
+    }
 
-.stories-img.color{
-    border: 2px solid #dbdbdb;
-}
+    .stories-img.color {
+        border: 2px solid #dbdbdb;
+    }
 
-.stories-img .add{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    color: #fff;
-    background: hsla(0, 0%, 25%, 0.7);
-}
+    .stories-img .add {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+        color: #fff;
+        background: hsla(0, 0%, 25%, 0.7);
+    }
 
-.feed{
+.feed {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
 }
 
-.feed h1{
-    font-size: 1.7rem;
-    letter-spacing: 1px;
-    color: #fff;
-    height: 70px;
-}
+    .feed h1 {
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+        color: #fff;
+        height: 70px;
+    }
 
-.feed-text{
+.feed-text {
     display: flex;
     align-items: center;
     color: #eee;
 }
 
-.feed h2{
+.feed h2 {
     font-size: irem;
     margin-right: 1rem;
 }
 
-.main-categories{
+.main-categories {
     display: flex;
     grid-template-columns: repeat(auto-fix, minmax(300px - auto));
     gap: 30px;
@@ -401,7 +410,7 @@ a.post-box {
     position: relative;
 }
 
-.post-box{
+.post-box {
     width: 300px;
     background-color: #1c1c1c;
     padding: 20px;
@@ -418,33 +427,49 @@ a.post-box {
         opacity: 0;
         visibility: hidden;
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        color:azure;
+        color: azure;
         text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
     }
 
-.post-box:hover h1 {
-    opacity: 1;
-    visibility: visible;
-}
+    .post-box:hover h1 {
+        opacity: 1;
+        visibility: visible;
+    }
 
+    .post-box img {
+        margin-left: 80px;
+        width: 100%;
+        height: 344px;
+        object-fit: cover;
+        border-radius: 2rem;
+    }
 
-.post-box img{
-    margin-left: 80px;
-    width: 100%;
-    height: 344px;
-    object-fit: cover;
-    border-radius: 2rem;
-}
-
-.post-info{
+.post-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-
-
-.post-profile{
+.post-profile {
     display: flex;
     align-items: center;
 }
+
+.custom-search-button {
+    position:absolute;
+    right: 450px;
+    width: 150px;
+    height: 35px;
+    background: linear-gradient(to right, gold, white);
+    color: black;
+    border: solid 1px;
+    border-color: antiquewhite;
+    padding: 0px 10px;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .custom-search-button:hover {
+        background: linear-gradient(to right, white, gold);
+    }

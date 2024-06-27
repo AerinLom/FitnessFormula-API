@@ -97,16 +97,18 @@
         <div class="menu">
             <a asp-controller="Home" asp-action="Dashboard">
                 <span class="icon">
-                    <i class="ri-function-line"></i>
+                    <i class="ri-home-line"></i>
                 </span>
-                Categories
+                Home
             </a>
-            <a href="#">
+
+            <a asp-controller="Workout" asp-action="CreateWorkout">
                 <span class="icon">
-                    <i class="ri-run-line"></i>
+                    <i class="ri-add-line"></i>
                 </span>
-                My Workouts
+                New Workout
             </a>
+
             <a asp-controller="User" asp-action="Settings">
                 <span class="icon">
                     <i class="ri-settings-line"></i>
@@ -119,11 +121,6 @@
     <div class="main-home">
         <div class="header">
             <!-- Header content -->
-            <div class="search">
-                <i class="ri-search-line"></i>
-                <input id="searchInput" type="text" placeholder="Search...">
-                <button onclick="searchWorkouts()">Search</button>
-            </div>
 
             <div class="header-content">
                 <button class="icon-btn">

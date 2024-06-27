@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = "Create a Workout";
     var username = TempData["Username"] as string;
+
+    var categories = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Strength", Text = "Strength" },
+        new SelectListItem { Value = "HIIT", Text = "HIIT" },
+        new SelectListItem { Value = "Flexibility", Text = "Flexibility" },
+        new SelectListItem { Value = "Functional", Text = "Functional" }
+    };
 }
 
 <!DOCTYPE html>
@@ -14,6 +22,37 @@
     <title>FitnessFormula Dashboard</title>
     <link rel="stylesheet" href="~/css/styling.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+
+        #workoutForm {
+            max-height: 770px;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: linear-gradient( rgba(100, 100, 150, 0.7), rgba(255, 215, 0, 0.5) );
+            background-color: slategrey;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: gold; /* Change text color to gold */
+            height: 50px;
+            width: 100%;
+            padding: 0 10px 0 45px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+            transition: .2s ease;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -51,16 +90,24 @@
         <div class="menu">
             <a asp-controller="Home" asp-action="Dashboard">
                 <span class="icon">
-                    <i class="ri-function-line"></i>
+                    <i class="ri-home-line"></i>
                 </span>
-                Categories
+                Home
             </a>
-            <a href="#">
+            <a asp-controller="Workout" asp-action="MyWorkouts">
                 <span class="icon">
                     <i class="ri-run-line"></i>
                 </span>
                 My Workouts
             </a>
+
+            <a asp-controller="Workout" asp-action="CreateWorkout">
+                <span class="icon">
+                    <i class="ri-add-line"></i>
+                </span>
+                New Workout
+            </a>
+
             <a asp-controller="User" asp-action="Settings">
                 <span class="icon">
                     <i class="ri-settings-line"></i>
@@ -73,11 +120,7 @@
     <div class="main-home">
         <div class="header">
             <!-- Header content -->
-            <div class="search">
-                <i class="ri-search-line"></i>
-                <input id="searchInput" type="text" placeholder="Search...">
-                <button onclick="searchWorkouts()">Search</button>
-            </div>
+
 
             <div class="header-content">
                 <button class="icon-btn">
@@ -102,22 +145,22 @@
             {
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, "Workout Name:")
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control input-field", required = "required" })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Category, "Category:")
-                    @Html.TextBoxFor(model => model.Category, new { @class = "form-control", required = "required" })
+                    @Html.DropDownListFor(model => model.Category, categories, new { @class = "form-control input-field", required = "required" })
                     @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Difficulty, "Difficulty:")
-                    @Html.TextBoxFor(model => model.Difficulty, new { @class = "form-control", required = "required" })
+                    @Html.TextBoxFor(model => model.Difficulty, new { @class = "form-control input-field", required = "required" })
                     @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Duration, "Duration (minutes):")
-                    @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number", required = "required" })
+                    @Html.TextBoxFor(model => model.Duration, new { @class = "form-control input-field", type = "number", required = "required" })
                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                 </div>
 
@@ -125,11 +168,11 @@
                 <div id="exercises">
                     <div class="form-group exercise">
                         <label>Exercise Name:</label>
-                        <input name="Exercises[0].Name" class="form-control" required>
+                        <input name="Exercises[0].Name" class="form-control input-field" required>
                         <label>Sets:</label>
-                        <input name="Exercises[0].Sets" type="number" class="form-control" required>
+                        <input name="Exercises[0].Sets" type="number" class="form-control input-field" required>
                         <label>Reps:</label>
-                        <input name="Exercises[0].Reps" type="number" class="form-control" required>
+                        <input name="Exercises[0].Reps" type="number" class="form-control input-field" required>
                     </div>
                 </div>
 
@@ -147,11 +190,11 @@
             const exerciseHtml = `
                                             <div class="form-group exercise">
                                                 <label for="exerciseName">Exercise Name:</label>
-                                                <input type="text" name="Exercises[${exerciseIndex}].Name" class="form-control" required>
+                                                        <input type="text" name="Exercises[${exerciseIndex}].Name" class="form-control input-field" required>
                                                 <label for="exerciseSets">Sets:</label>
-                                                <input type="number" name="Exercises[${exerciseIndex}].Sets" class="form-control" required>
+                                                        <input type="number" name="Exercises[${exerciseIndex}].Sets" class="form-control input-field" required>
                                                 <label for="exerciseReps">Reps:</label>
-                                                <input type="number" name="Exercises[${exerciseIndex}].Reps" class="form-control" required>
+                                                        <input type="number" name="Exercises[${exerciseIndex}].Reps" class="form-control input-field" required>
                                             </div>
                                         `;
             document.getElementById('exercises').insertAdjacentHTML('beforeend', exerciseHtml);
