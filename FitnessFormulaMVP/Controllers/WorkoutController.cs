@@ -422,7 +422,5 @@ namespace FitnessFormulaMVP.Controllers
                 return BadRequest(new { success = false, message = ex.Message });
             }
         }
-
-
     }
 }

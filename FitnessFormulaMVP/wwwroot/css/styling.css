@@ -475,13 +475,12 @@ a.post-box {
     }
 
 
-/* styling for workout tiles starts here*/
 .workout-tile {
-    background-image: url(strength-workout.JPG);
+    background-image: url(../images/athlete-modified.jpg);
+    color: gold;
     background-size: cover;
     background-position: center;
-    color: rgb(255, 255, 255);
-    width: 400px;
+    width: 750px;
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -493,18 +492,21 @@ a.post-box {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, background-color 0.3s;
     text-decoration: none;
-    margin-left: 30rem;
+    margin-left: 165px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 2px black;
 }
 
-.workout-tile:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px 10px rgba(255, 255, 0, 0.6); /* Darker blue on hover */
-}
+    .workout-tile:hover {
+        transform: scale(1.015);
+        box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0.6);
+        color: #B8860B;
+    }
 
+        .workout-tile:hover::before {
+            background: rgba(255, 255, 255, 0.7);
+        }
 
-.workout-tile:hover::before {
-    background: rgba(255, 255, 255, 0.7); /* Lighter overlay on hover */
-}
 
 .workout-tile h2 {
     margin: 0;
@@ -516,4 +518,21 @@ a.post-box {
     margin: 0;
     font-size: 0.9rem;
 }
+
+.save-workout-button {
+    background: linear-gradient(to right, gold, darkgoldenrod);
+    color: black;
+    border: 2px solid black;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-left: 10px;
+}
+
+    .save-workout-button:hover {
+        background: linear-gradient(to right, darkgoldenrod, gold);
+        color: black;
+    }
+
 

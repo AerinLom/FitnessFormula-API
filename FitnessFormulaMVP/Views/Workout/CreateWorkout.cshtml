@@ -42,7 +42,7 @@
         .input-field {
             font-size: 15px;
             background: rgba(255, 255, 255, 0.2);
-            color: gold; /* Change text color to gold */
+            color: gold;
             height: 50px;
             width: 100%;
             padding: 0 10px 0 45px;
@@ -51,6 +51,28 @@
             outline: none;
             transition: .2s ease;
         }
+
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end; /* Adjust this to position buttons */
+            margin-top: auto; /* Push buttons to the bottom */
+            padding-top: 10px; /* Adjust padding as needed */
+        }
+
+        .custom-form-button {
+            background: linear-gradient(to right, gold, white);
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-left: 10px; /* Adjust the margin as needed */
+        }
+
+            .custom-form-button:hover {
+                background: linear-gradient(to right, darkgoldenrod, white); /* Darker gold on hover */
+            }
     </style>
 
 </head>
@@ -176,8 +198,8 @@
                     </div>
                 </div>
 
-                <button type="button" onclick="addExercise()" class="btn btn-primary">Add Exercise</button>
-                <button type="submit" class="btn btn-success">Create Workout</button>
+                <button type="button" onclick="addExercise()" class="custom-form-button">Add Exercise</button>
+                <button type="submit" class="custom-form-button">Create Workout</button>
             }
         </div>
     </div>

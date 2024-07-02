@@ -7,6 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\deadlift.jpg" />
+    <Content Remove="wwwroot\images\NewFitnessFormula.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\lp_style.css" />
+    <None Include="wwwroot\images\about-us-img-modified.jpg" />
+    <None Include="wwwroot\images\cover-image.jpg" />
+    <None Include="wwwroot\images\create-workout.png" />
+    <None Include="wwwroot\images\dashboard.png" />
+    <None Include="wwwroot\images\deadlift.jpg" />
+    <None Include="wwwroot\images\feature.png" />
+    <None Include="wwwroot\images\getups.jpg" />
+    <None Include="wwwroot\images\image-1.jpg" />
+    <None Include="wwwroot\images\image-2.jpg" />
+    <None Include="wwwroot\images\meet-the-team-img-modified.jpg" />
+    <None Include="wwwroot\images\NewFitnessFormula.png" />
+    <None Include="wwwroot\images\profile-1.jpg" />
+    <None Include="wwwroot\images\profile-2.JPG" />
+    <None Include="wwwroot\images\workout-selection.png" />
+    <None Include="wwwroot\js\main.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
