@@ -457,7 +457,7 @@ a.post-box {
 
 .custom-search-button {
     position:absolute;
-    right: 450px;
+    right: 400px;
     width: 150px;
     height: 35px;
     background: linear-gradient(to right, gold, white);
@@ -534,5 +534,31 @@ a.post-box {
         background: linear-gradient(to right, darkgoldenrod, gold);
         color: black;
     }
+
+.prev-button {
+    background: linear-gradient(to bottom right, black, gold);
+    color: white;
+    border: none;
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    font-size: 20px; /* Adjust the icon size */
+}
+
+    .prev-button:hover {
+        background: linear-gradient(to bottom right, gold, black);
+        color: white;
+    }
+
+    .prev-button i {
+        margin: 0; /* No margin needed since the button is circular */
+    }
+
 
 
