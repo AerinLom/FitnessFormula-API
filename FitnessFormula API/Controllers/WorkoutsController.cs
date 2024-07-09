@@ -17,6 +17,7 @@ namespace FitnessFormula_API.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<WorkoutsController> _logger;
+
         public WorkoutsController(ApplicationDbContext context, ILogger<WorkoutsController> logger)
         {
             _context = context;
@@ -27,84 +28,115 @@ namespace FitnessFormula_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Workout>>> GetWorkouts()
         {
-            var workouts = await _context.Workout
-                .Include(w => w.Exercises)
-                .ToListAsync();
-
-            // Configure JsonSerializerOptions with ReferenceHandler.Preserve
-            var options = new JsonSerializerOptions
+            try
             {
-                ReferenceHandler = ReferenceHandler.Preserve
-            };
+                // Retrieve all workouts including exercises using EF Core Include
+                var workouts = await _context.Workout
+                    .Include(w => w.Exercises)
+                    .ToListAsync();
 
-            // Serialize workouts with the configured options
-            var jsonWorkouts = JsonSerializer.Serialize(workouts, options);
+                // Configure JsonSerializerOptions with ReferenceHandler.Preserve
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
 
-            return Ok(jsonWorkouts);
+                // Serialize workouts with the configured options
+                var jsonWorkouts = JsonSerializer.Serialize(workouts, options);
+
+                return Ok(jsonWorkouts); // Return serialized workouts
+            }
+            catch (Exception ex)
+            {
+                // Log and return 500 Internal Server Error for any exceptions
+                _logger.LogError(ex, "Error occurred while fetching workouts.");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         // GET: api/Workouts/name/{name}
         [HttpGet("name/{name}")]
         public async Task<ActionResult<Workout>> GetWorkoutByName(string name)
         {
+            // Validate workout name
             if (string.IsNullOrWhiteSpace(name))
             {
                 return BadRequest("Workout name cannot be empty.");
             }
 
-            var workout = await _context.Workout
-                .Include(w => w.Exercises)
-                .FirstOrDefaultAsync(w => w.Name.ToLower() == name.ToLower());
-
-            if (workout == null)
+            try
             {
-                return NotFound("Workout not found.");
+                // Retrieve workout including exercises by name using EF Core Include and case-insensitive search
+                var workout = await _context.Workout
+                    .Include(w => w.Exercises)
+                    .FirstOrDefaultAsync(w => w.Name.ToLower() == name.ToLower());
+
+                if (workout == null)
+                {
+                    return NotFound("Workout not found.");
+                }
+
+                // Configure JsonSerializerOptions with ReferenceHandler.Preserve to handle cycles
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    MaxDepth = 32 // Increase depth limit if needed
+                };
+
+                // Serialize workout using configured options
+                var jsonWorkout = JsonSerializer.Serialize(workout, options);
+
+                return Ok(jsonWorkout); // Return serialized workout
             }
-
-            // Configure JsonSerializerOptions with ReferenceHandler.Preserve to handle cycles
-            var options = new JsonSerializerOptions
+            catch (Exception ex)
             {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 32 // Increase depth limit if needed
-            };
-
-            // Serialize workout using configured options
-            var jsonWorkout = JsonSerializer.Serialize(workout, options);
-
-            return Ok(jsonWorkout);
+                // Log and return 500 Internal Server Error for any exceptions
+                _logger.LogError(ex, $"Error occurred while fetching workout by name: {name}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
-
-        // GET: api/Workouts/category/Strength
+        // GET: api/Workouts/category/{category}
         [HttpGet("category/{category}")]
         public async Task<ActionResult<IEnumerable<Workout>>> GetWorkoutsByCategory(string category)
         {
-            var workouts = await _context.Workout
-                .Include(w => w.Exercises)
-                .Where(w => w.Category == category)
-                .ToListAsync();
-
-            if (workouts == null || workouts.Count == 0)
+            try
             {
-                return NotFound();
+                // Retrieve workouts including exercises by category using EF Core Include
+                var workouts = await _context.Workout
+                    .Include(w => w.Exercises)
+                    .Where(w => w.Category == category)
+                    .ToListAsync();
+
+                if (workouts == null || workouts.Count == 0)
+                {
+                    return NotFound("No workouts found.");
+                }
+
+                // Configure JsonSerializerOptions with ReferenceHandler.Preserve
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
+
+                // Serialize workouts with the configured options
+                var jsonWorkouts = JsonSerializer.Serialize(workouts, options);
+
+                return Ok(jsonWorkouts); // Return serialized workouts
             }
-
-            // Configure JsonSerializerOptions with ReferenceHandler.Preserve
-            var options = new JsonSerializerOptions
+            catch (Exception ex)
             {
-                ReferenceHandler = ReferenceHandler.Preserve
-            };
-
-            // Serialize workouts with the configured options
-            var jsonWorkouts = JsonSerializer.Serialize(workouts, options);
-
-            return Ok(jsonWorkouts);
+                // Log and return 500 Internal Server Error for any exceptions
+                _logger.LogError(ex, $"Error occurred while fetching workouts by category: {category}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
-        // GET: api/Workouts/Search/{WorkoutName}
+        // GET: api/Workouts/Search/{workoutName}
         [HttpGet("Search/{workoutName}")]
         public async Task<ActionResult<IEnumerable<Workout>>> GetWorkoutsByName(string workoutName)
         {
+            // Validate workout name
             if (string.IsNullOrWhiteSpace(workoutName))
             {
                 return BadRequest("Workout name cannot be empty.");
@@ -112,6 +144,7 @@ namespace FitnessFormula_API.Controllers
 
             try
             {
+                // Retrieve workouts including exercises by partial name match using EF Core Include and case-insensitive search
                 var workouts = await _context.Workout
                     .Include(w => w.Exercises)
                     .Where(w => w.Name.ToLower().Contains(workoutName.ToLower()))
@@ -131,44 +164,49 @@ namespace FitnessFormula_API.Controllers
                 // Serialize workouts with the configured options
                 var jsonWorkouts = JsonSerializer.Serialize(workouts, options);
 
-                return Ok(jsonWorkouts);
+                return Ok(jsonWorkouts); // Return serialized workouts
             }
             catch (Exception ex)
             {
-                // Handle exceptions
+                // Log and return 500 Internal Server Error for any exceptions
+                _logger.LogError(ex, $"Error occurred while searching workouts by name: {workoutName}");
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
 
-
+        // PUT: api/Workouts/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateWorkout(int id, [FromBody] Workout updatedWorkout)
         {
+            // Validate ID match
             if (id != updatedWorkout.WorkoutId)
             {
                 return BadRequest();
             }
 
-            var existingWorkout = await _context.Workout
-                .Include(w => w.Exercises) // Ensure exercises are loaded
-                .FirstOrDefaultAsync(w => w.WorkoutId == id);
-
-            if (existingWorkout == null)
-            {
-                return NotFound();
-            }
-
-            // Add new exercises to the existing workout
-            foreach (var exercise in updatedWorkout.Exercises)
-            {
-                existingWorkout.Exercises.Add(exercise);
-            }
-
             try
             {
+                // Retrieve existing workout including exercises
+                var existingWorkout = await _context.Workout
+                    .Include(w => w.Exercises)
+                    .FirstOrDefaultAsync(w => w.WorkoutId == id);
+
+                if (existingWorkout == null)
+                {
+                    return NotFound();
+                }
+
+                // Add new exercises to the existing workout
+                foreach (var exercise in updatedWorkout.Exercises)
+                {
+                    existingWorkout.Exercises.Add(exercise);
+                }
+
                 // Update the workout in the database
                 _context.Entry(existingWorkout).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+
+                return NoContent(); // HTTP 204
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -178,16 +216,21 @@ namespace FitnessFormula_API.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw; // Bubble up the exception for logging
                 }
             }
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating workout with ID: {id}");
+                return StatusCode(500, $"Failed to update workout: {ex.Message}");
+            }
         }
 
+        // POST: api/Workouts
         [HttpPost]
         public async Task<ActionResult<Workout>> CreateWorkout([FromBody] Workout workout)
         {
+            // Validate model state
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -195,46 +238,51 @@ namespace FitnessFormula_API.Controllers
 
             try
             {
+                // Add the new workout to the database
                 _context.Workout.Add(workout);
                 await _context.SaveChangesAsync();
 
-                // Ensure each exercise is associated with the workout and does not set Id
+                // Ensure each exercise is associated with the workout and set WorkoutId
                 foreach (var exercise in workout.Exercises)
                 {
-                    exercise.WorkoutId = workout.WorkoutId; // Ensure WorkoutId is set correctly
+                    exercise.WorkoutId = workout.WorkoutId; // Set WorkoutId correctly
                     _context.Exercises.Add(exercise);
                 }
 
                 await _context.SaveChangesAsync();
 
-                return CreatedAtRoute("GetWorkout", new { id = workout.WorkoutId }, workout);
+                return CreatedAtRoute("GetWorkout", new { id = workout.WorkoutId }, workout); // Return 201 Created
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating workout.");
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return StatusCode(500, $"Failed to create workout: {ex.Message}");
             }
         }
 
-        // DELETE: api/Workouts/5
+        // DELETE: api/Workouts/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorkout(int id)
         {
-            var workout = await _context.Workout.FindAsync(id); // Singular "Workout"
+            // Find the workout by ID
+            var workout = await _context.Workout.FindAsync(id);
+
             if (workout == null)
             {
                 return NotFound();
             }
 
-            _context.Workout.Remove(workout); // Singular "Workout"
+            // Remove the workout from the database
+            _context.Workout.Remove(workout);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return NoContent(); // HTTP 204
         }
 
         private bool WorkoutExists(int id)
         {
-            return _context.Workout.Any(e => e.WorkoutId == id); // Singular "Workout"
+            // Check if any workout exists with the specified ID
+            return _context.Workout.Any(e => e.WorkoutId == id);
         }
     }
 }

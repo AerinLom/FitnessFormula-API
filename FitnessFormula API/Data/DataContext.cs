@@ -9,6 +9,7 @@ namespace FitnessFormula_API.Data
         {
         }
 
+        // Define DbSet properties for each entity
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Workout> Workout { get; set; }
         public DbSet<UserWorkout> UserWorkouts { get; set; }
@@ -17,23 +18,27 @@ namespace FitnessFormula_API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure many-to-many relationship for UserWorkout entity
             modelBuilder.Entity<UserWorkout>()
-                .HasKey(uw => new { uw.UserId, uw.WorkoutId });
+                .HasKey(uw => new { uw.UserId, uw.WorkoutId }); // Composite key
 
             modelBuilder.Entity<UserWorkout>()
                 .HasOne(uw => uw.User)
-                .WithMany(u => u.UserWorkouts)
-                .HasForeignKey(uw => uw.UserId);
+                .WithMany(u => u.UserWorkouts) // One user can have many user workouts
+                .HasForeignKey(uw => uw.UserId); // Foreign key
 
+            // Configure one-to-many relationship for Workout to Exercises
             modelBuilder.Entity<Workout>()
-                .HasMany(w => w.Exercises)
-                .WithOne(e => e.Workout)
-                .HasForeignKey(e => e.WorkoutId);
-            
+                .HasMany(w => w.Exercises) // One workout can have many exercises
+                .WithOne(e => e.Workout) // Each exercise belongs to one workout
+                .HasForeignKey(e => e.WorkoutId); // Foreign key in Exercises table
+
+            // Configure auto-generated Id property for Exercises
             modelBuilder.Entity<Exercises>()
                 .Property(e => e.Id)
-                .ValueGeneratedOnAdd();
-            base.OnModelCreating(modelBuilder);
+                .ValueGeneratedOnAdd(); // Automatically generated on add
+
+            base.OnModelCreating(modelBuilder); // Call base method for further configurations
         }
     }
 }

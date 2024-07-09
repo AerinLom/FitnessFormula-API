@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessFormula API", "FitnessFormula API\FitnessFormula API.csproj", "{12B62284-E9EE-4307-932B-CE21D639DEF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessFormulaMVP", "FitnessFormulaMVP\FitnessFormulaMVP.csproj", "{CE5D0775-5763-4C46-B613-E2184CB7D4BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessFormulaMVP", "FitnessFormulaMVP\FitnessFormulaMVP.csproj", "{CE5D0775-5763-4C46-B613-E2184CB7D4BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
