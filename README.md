@@ -21,44 +21,21 @@ Installation:
 
 To get a copy locally, follow these steps:
 
-# 1. Clone the repository
-git clone https://github.com/AerinLom/FitnessFormula-API.git
 
-# 2. Navigate to the project's directory
-cd FitnessFormula-API/FitnessFormulaMVP
 
-# 3. Download and install the .NET 8.0 SDK
-wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-chmod +x dotnet-install.sh
-./dotnet-install.sh --channel 8.0 --install-dir /usr/share/dotnet
 
-# 4. Add the .NET SDK to the PATH
-export PATH=$PATH:/usr/share/dotnet
 
-# 5. Restore the project dependencies
-dotnet restore
 
-# 6. Build the project
-dotnet build
 
-# 7. Publish the project
-dotnet publish -c Release -o /home/ubuntu/publish/FitnessFormulaMVP
 
-# 8. Run the application
-dotnet /home/ubuntu/publish/FitnessFormulaMVP/FitnessFormulaMVP.dll
-
+- npm start
 
 Usage:
 
-1. From the landing page cick get started, then click signup/login to create an account.
 
-2. After account creation, login with the credentials you provided on signup.
 
-3. Find workouts using the search functionality or create custom workouts using "Create a workout".
 
-4. To save workouts, click into a workout and then save.
 
-5. To view saved workouts, navigate to the 'My Workouts' section.
 
 Contributions:
 
