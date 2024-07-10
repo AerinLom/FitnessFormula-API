@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;  // Import necessary namespaces
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -15,10 +15,10 @@ namespace FitnessFormulaMVP.Controllers
 {
     public class WorkoutController : Controller
     {
-        private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:7076/api/";
+        private readonly HttpClient _httpClient;  // HTTP client instance for making requests to the API
+        private readonly string _baseUrl = "https://localhost:7076/api/";  // Base URL of the API
 
-        public WorkoutController()
+        public WorkoutController()  // Constructor initializing HttpClient and setting base address and headers
         {
             _httpClient = new HttpClient
             {
@@ -27,17 +27,19 @@ namespace FitnessFormulaMVP.Controllers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public IActionResult NoWorkoutsFound()
+
+        public IActionResult NoWorkoutsFound()  // Action method for displaying "NoWorkoutsFound" view
         {
-            return View("NoWorkoutsFound");
+            return View("NoWorkoutsFound");  // Return NoWorkoutsFound view
         }
 
         [HttpGet]
-        public IActionResult CreateWorkout()
+        public IActionResult CreateWorkout()  // GET action method for displaying create workout view
         {
-            return View();
+            return View();  // Return CreateWorkout view
         }
-        public async Task<IActionResult> StrengthView()
+
+        public async Task<IActionResult> StrengthView()  // Action method for displaying workouts categorized under Strength
         {
             try
             {
@@ -71,7 +73,7 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-        public async Task<IActionResult> HIITView()
+        public async Task<IActionResult> HIITView()  // Action method for displaying workouts categorized under HIIT
         {
             try
             {
@@ -105,7 +107,7 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-        public async Task<IActionResult> FlexibilityView()
+        public async Task<IActionResult> FlexibilityView()  // Action method for displaying workouts categorized under Flexibility
         {
             try
             {
@@ -139,7 +141,7 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-        public async Task<IActionResult> FunctionalView()
+        public async Task<IActionResult> FunctionalView()  // Action method for displaying workouts categorized under Functional
         {
             try
             {
@@ -173,7 +175,7 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-        public async Task<IActionResult> ViewWorkout(string name)
+        public async Task<IActionResult> ViewWorkout(string name)  // Action method for displaying details of a specific workout
         {
             try
             {
@@ -209,7 +211,7 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-        public async Task<IActionResult> ViewMyWorkout(string name)
+        public async Task<IActionResult> ViewMyWorkout(string name)  // Action method for displaying details of a specific workout for the logged-in user
         {
             try
             {
@@ -246,7 +248,7 @@ namespace FitnessFormulaMVP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SearchWorkouts(string workoutName)
+        public async Task<IActionResult> SearchWorkouts(string workoutName)  // GET action method for searching workouts by name
         {
             if (string.IsNullOrWhiteSpace(workoutName))
             {
@@ -288,9 +290,7 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-
-
-        public async Task<IActionResult> MyWorkouts()
+        public async Task<IActionResult> MyWorkouts()  // Action method for displaying workouts saved by the logged-in user
         {
             if (HttpContext.Session.GetString("UserId") == null)
             {
@@ -345,9 +345,8 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> SaveWorkout(int workoutId)
+        public async Task<IActionResult> SaveWorkout(int workoutId)  // POST action method for saving a workout for the logged-in user
         {
             // Retrieve userId from session or wherever it's stored
             var userId = HttpContext.Session.GetString("UserId");
@@ -388,38 +387,38 @@ namespace FitnessFormulaMVP.Controllers
             {
                 TempData["Error"] = $"Failed to save workout: {ex.Message}";
                 // Log the exception for debugging purposes
- 
             }
             catch (Exception ex)
             {
                 TempData["Error"] = $"Failed to save workout: {ex.Message}";
-;
             }
-            return RedirectToAction("Dashboard", "Home");
+
+            return RedirectToAction("Dashboard", "Home");  // Redirect to Dashboard action in Home controller
         }
+
         [HttpPost]
-        public async Task<IActionResult> CreateWorkout(WorkoutModel workout)
+        public async Task<IActionResult> CreateWorkout(WorkoutModel workout)  // POST action method for creating a new workout
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState);  // Return bad request if model state is not valid
             }
             try
             {
-                var json = JsonConvert.SerializeObject(workout);
+                var json = JsonConvert.SerializeObject(workout);  // Serialize workout object into JSON
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("https://localhost:7076/api/Workouts", content);
+                var response = await _httpClient.PostAsync("https://localhost:7076/api/Workouts", content);  // Send POST request to API endpoint
 
-                return RedirectToAction("Dashboard", "Home");
+                return RedirectToAction("Dashboard", "Home");  // Redirect to Dashboard action in Home controller
             }
             catch (HttpRequestException ex)
             {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
+                return View("Error", new ErrorViewModel { Message = ex.Message });  // Return error view with message
             }
             catch (Exception ex)
             {
-                return BadRequest(new { success = false, message = ex.Message });
+                return BadRequest(new { success = false, message = ex.Message });  // Return bad request with error message
             }
         }
     }

@@ -1,25 +1,27 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/lp_style.css" />
-    <script src="https://kit.fontawesome.com/dd9af7210e.js" crossorigin="anonymous"></script>
-    <title>FitnessFormula | Landing Page</title>
+    <meta charset="UTF-8" /> <!-- Character set for UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive viewport settings -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" /> <!-- Linking to Remixicon font -->
+    <link rel="stylesheet" href="/css/lp_style.css" /> <!-- Linking to custom CSS file -->
+    <script src="https://kit.fontawesome.com/dd9af7210e.js" crossorigin="anonymous"></script> <!-- Linking to Font Awesome icons -->
+    <title>FitnessFormula | Landing Page</title> <!-- Setting the title of the page -->
 </head>
 <body>
+    <!-- Navigation section -->
     <nav>
         <div class="nav__header">
             <div class="nav__logo">
                 <a href="#">
-                    <img src="/images/NewFitnessFormula.png" alt="Logo" class="nav__logo-image" />
+                    <img src="/images/NewFitnessFormula.png" alt="Logo" class="nav__logo-image" /> <!-- Logo image -->
                 </a>
             </div>
             <div class="nav__menu__btn" id="menu-btn">
-                <i class="ri-menu-line"></i>
+                <i class="ri-menu-line"></i> <!-- Menu icon -->
             </div>
         </div>
+        <!-- Navigation links -->
         <ul class="nav__links" id="nav-links">
             <li>
                 <a asp-controller="User" asp-action="Logout" class="nav-link login-link">
@@ -31,24 +33,30 @@
             <li><a href="#team" class="nav-link about-link">Our Team</a></li>
         </ul>
     </nav>
+
+    <!-- Main content container -->
     <div class="container">
+        <!-- Left section of the container -->
         <div class="container__left">
-            <h1>Formula for Fitness, Recipe for Success</h1>
+            <h1>Formula for Fitness, Recipe for Success</h1> <!-- Main heading -->
             <div class="container__btn">
                 <a asp-controller="User" asp-action="Logout" class="btn">
                     Get Started
-                </a>
+                </a> <!-- Get Started button -->
             </div>
         </div>
+        <!-- Right section of the container -->
         <div class="container__right">
+            <!-- Images section -->
             <div class="images">
-                <img src="/images/getups.jpg" alt="getups" class="getups" />
-                <img src="/images/image-2.jpg" alt="image-2" class="image-2" />
+                <img src="/images/getups.jpg" alt="getups" class="getups" /> <!-- Image -->
+                <img src="/images/image-2.jpg" alt="image-2" class="image-2" /> <!-- Image -->
             </div>
+            <!-- Content section -->
             <div class="content">
-                <h4></h4>
-                <h2>OUR MISSION</h2>
-                <h3></h3>
+                <h4></h4> <!-- Subheading -->
+                <h2>OUR MISSION</h2> <!-- Mission heading -->
+                <h3></h3> <!-- Subheading -->
                 <p>
                     Welcome to FitnessFormula - Formula for Fitness, Recipe for Success
 
@@ -61,36 +69,39 @@
                     that puts your overall wellness first. Join us and transform your fitness
                     journey with us.
                     FitnessFormula - where your goals are our mission
-                </p>
+                </p> <!-- Mission description -->
             </div>
         </div>
+        <!-- Social media links -->
         <div class="socials">
             <span>
-                <a href="#"><i class="ri-facebook-fill"></i></a>
+                <a href="#"><i class="ri-facebook-fill"></i></a> <!-- Facebook icon -->
             </span>
             <span>
-                <a href="#"><i class="ri-instagram-line"></i></a>
+                <a href="#"><i class="ri-instagram-line"></i></a> <!-- Instagram icon -->
             </span>
             <span>
-                <a href="#"><i class="ri-twitter-fill"></i></a>
+                <a href="#"><i class="ri-twitter-fill"></i></a> <!-- Twitter icon -->
             </span>
         </div>
     </div>
 
+    <!-- Features section -->
     <div id="features" class="new-section">
-        <h2>Features</h2>
-        <p>What we offer</p>
+        <h2>Features</h2> <!-- Features heading -->
+        <p>What we offer</p> <!-- Features description -->
         <div class="features-imgs">
-            <img src="/images/dashboard.png" alt="feature" class="feature" />
+            <img src="/images/dashboard.png" alt="feature" class="feature" /> <!-- Feature image -->
         </div>
         <div class="text-box">
+            <!-- Text box for feature details -->
             <div class="left-text">
                 <p>
                     Our interactive dashboard provides you
                     with a wide variation of exercise categories.
                     We offer Strength, HIIT, Functional and Flexibility
                     programs to suit your fitness goals.
-                </p>
+                </p> <!-- Feature details -->
                 <div class="text-box-2">
                     <div class="left-text-2">
                         <P>
@@ -98,7 +109,7 @@
                             This feature enables the user to select the category, level of
                             difficulty, the amount of reps, sets and duration. All this is then
                             saved onto the My Workouts tab.
-                        </P>
+                        </P> <!-- Custom workout details -->
                     </div>
                 </div>
                 <div class="text-box-3">
@@ -107,23 +118,25 @@
                             Use the search bar to choose between our wide array of industry competitive workout programs
                             We have programs that target different aspects of fitness, from squats to arm workouts like
                             bicep curls.
-                        </p>
+                        </p> <!-- Search bar usage details -->
                     </div>
                 </div>
                 <div class="custom-workout">
-                    <img src="/images/create-workout.png" alt="create-workout" class="create-workout" />
+                    <img src="/images/create-workout.png" alt="create-workout" class="create-workout" /> <!-- Create workout image -->
                 </div>
             </div>
             <div class="workout-container">
                 <div class="workout-imgs">
-                    <img src="/images/workout-selection.png" alt="workout-selection" class="workout-selection" />
+                    <img src="/images/workout-selection.png" alt="workout-selection" class="workout-selection" /> <!-- Workout selection image -->
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- About Us section -->
     <section id="about-us">
         <h1 class="heading">
-            <i class="fas fa-eye"></i><strong>About Us</strong>
+            <i class="fas fa-eye"></i><strong>About Us</strong> <!-- About Us heading -->
         </h1>
         <p>
             The inspiration for FitnessFormula stemmed from a common frustration shared by many fitness enthusiasts and beginners alike:
@@ -142,13 +155,16 @@
             In essence, FitnessFormula was inspired by the need for a more structured, comprehensive, and user-friendly approach to fitness and wellness,
             aiming to transform how people manage their fitness journeys.
 
-        </p>
+        </p> <!-- About Us description -->
     </section>
+
+    <!-- Our Team section -->
     <section id="team">
         <h1 class="heading">
-            <i class="fas fa-rocket"></i><strong>Our Team</strong>
+            <i class="fas fa-rocket"></i><strong>Our Team</strong> <!-- Our Team heading -->
         </h1>
         <div class="container">
+            <!-- Team member boxes -->
             <div class="box">
                 <div class="top-bar"></div>
                 <div class="nav">
@@ -158,16 +174,16 @@
                 </div>
 
                 <div class="details">
-                    <img src="/images/profile-1.jpg" alt="profile-1">
-                    <strong>Khehla (MK) Dlamini</strong>
-                    <p>dlaminimkultra@gmail.com</p>
-                    <strong>Frontend Developer</strong>
+                    <img src="/images/profile-1.jpg" alt="profile-1"> <!-- Team member profile image -->
+                    <strong>Khehla (MK) Dlamini</strong> <!-- Team member name -->
+                    <p>dlaminimkultra@gmail.com</p> <!-- Team member email -->
+                    <strong>Frontend Developer</strong> <!-- Team member role -->
                 </div>
 
                 <div class="btn">
-                    <a href="https://github.com/MKDLAMINI"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/khehla-dlamini-debugs/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/MKDLAMINI"><i class="fab fa-github"></i></a> <!-- GitHub link -->
+                    <a href="#"><i class="fab fa-twitter"></i></a> <!-- Twitter link -->
+                    <a href="https://www.linkedin.com/in/khehla-dlamini-debugs/"><i class="fab fa-linkedin"></i></a> <!-- LinkedIn link -->
                 </div>
             </div>
             <div class="box">
@@ -179,31 +195,33 @@
                 </div>
 
                 <div class="details">
-                    <img src="/images/profile-2.JPG" alt="profile-2">
-                    <strong>Aerin Lombard</strong>
-                    <p>aerinlom1@gmail.com</p>
-                    <strong>Backend Developer</strong>
+                    <img src="/images/profile-2.JPG" alt="profile-2"> <!-- Team member profile image -->
+                    <strong>Aerin Lombard</strong> <!-- Team member name -->
+                    <p>aerinlom1@gmail.com</p> <!-- Team member email -->
+                    <strong>Backend Developer</strong> <!-- Team member role -->
                 </div>
 
                 <div class="btn">
-                    <a href="https://github.com/AerinLom"><i class="fab fa-github"></i></a>
-                    <a href="https://x.com/a_michaelllll"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/aerin-lombard/"><i class="fab fa-linkedin"></i></a>
-                </div>  
-            </div>   
+                    <a href="https://github.com/AerinLom"><i class="fab fa-github"></i></a> <!-- GitHub link -->
+                    <a href="https://x.com/a_michaelllll"><i class="fab fa-twitter"></i></a> <!-- Twitter link -->
+                    <a href="https://www.linkedin.com/in/aerin-lombard/"><i class="fab fa-linkedin"></i></a> <!-- LinkedIn link -->
+                </div>
+            </div>
         </div>
+        <!-- Project GitHub repository link -->
         <div class="container">
             <div class="box" style="height: 120px">
                 <div class="details">
                     <strong>Project Github Repository</strong>
-                    <a href="https://github.com/AerinLom/FitnessFormula-API"><i class="fab fa-github github-icon" style="font-size: 4em; color: dimgrey;"></i></a>
+                    <a href="https://github.com/AerinLom/FitnessFormula-API"><i class="fab fa-github github-icon" style="font-size: 4em; color: dimgrey;"></i></a> <!-- GitHub repository link -->
                 </div>
             </div>
         </div>
 
     </section>
 
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="/js/main.js"></script>
+    <!-- ScrollReveal and main script -->
+    <script src="https://unpkg.com/scrollreveal"></script> <!-- ScrollReveal library -->
+    <script src="/js/main.js"></script> <!-- Main JavaScript file -->
 </body>
 </html>

@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Success";
-    var username = TempData["Username"] as string;
+    ViewData["Title"] = "Success"; // Setting the title of the view
+    var username = TempData["Username"] as string; // Retrieving username from TempData
 }
 
 <!DOCTYPE html>
@@ -9,45 +9,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitnessFormula Dashboard</title>
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/styling.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>FitnessFormula Dashboard</title> <!-- Setting the title of the HTML page -->
+    <title>@ViewData["Title"]</title> <!-- Setting the title dynamically from ViewData -->
+    <link rel="stylesheet" href="~/css/styling.css"> <!-- Linking to custom CSS stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> <!-- Linking to Remixicon font -->
 </head>
-    <body>
+<body>
 
+    <!-- Sidebar navigation and user profile section -->
+    <div class="sidebar">
+        <a href="#" class="logo">
+            <img src="~/images/NewFitnessFormula.png" alt=""> <!-- Logo image -->
+        </a>
+        <div class="profile">
+            <button class="profile-btn">
+                <div class="profile-img">
+                    <img src="~/images/user.jpg" alt=""> <!-- User profile image -->
+                </div>
+            </button>
+            <div class="name">
+                <h1>@username</h1> <!-- Displaying username -->
+                <img src="" alt=""> <!-- Placeholder for additional user info -->
+            </div>
+            <span></span> <!-- Additional visual element -->
+        </div>
 
-        <div class="sidebar">
-            <a href="#" class="logo">
-                <img src="~/images/NewFitnessFormula.png" alt="">
-            </a>
-            <div class="profile">
-                <button class="profile-btn">
-                    <div class="profile-img">
-                        <img src="~/images/user.jpg" alt="">
-                    </div>
-                </button>
-                <div class="name">
-                    <h1>@username</h1>
-                    <img src="" alt="">
-                </div>
-                <span></span>
-            </div>
-            <div class="about">
-                <div class="box">
-                    <h3></h3>
-                    <span></span>
-                </div>
-                <div class="box">
-                    <h3></h3>
-                    <span></span>
-                </div>
-                <div class="box">
-                    <h3></h3>
-                    <span></span>
-                </div>
-            </div>
-            <div class="menu">
+        <!-- Navigation menu links -->
+        <div class="menu">
             <a asp-controller="Home" asp-action="Dashboard">
                 <span class="icon">
                     <i class="ri-home-line"></i>
@@ -55,86 +43,91 @@
                 Home
             </a>
             <a asp-controller="Workout" asp-action="MyWorkouts">
-                    <span class="icon">
-                        <i class="ri-run-line"></i>
-                    </span>
-                    My Workouts
-                </a>
-
+                <span class="icon">
+                    <i class="ri-run-line"></i>
+                </span>
+                My Workouts
+            </a>
             <a asp-controller="Workout" asp-action="CreateWorkout">
                 <span class="icon">
                     <i class="ri-add-line"></i>
                 </span>
                 New Workout
             </a>
-
             <a asp-controller="User" asp-action="Settings">
-                    <span class="icon">
-                        <i class="ri-settings-line"></i>
-                    </span>
-                    Settings
-                </a>
-
-            </div>
+                <span class="icon">
+                    <i class="ri-settings-line"></i>
+                </span>
+                Settings
+            </a>
         </div>
+    </div>
 
-        <div class="main-home">
-            <div class="header">
+    <!-- Main content section -->
+    <div class="main-home">
+        <div class="header">
+            <!-- Search bar -->
             <div class="search">
-                <i class="ri-search-line"></i>
+                <i class="ri-search-line"></i> <!-- Search icon -->
                 <form asp-controller="Workout" asp-action="SearchWorkouts" method="get" style="display: flex; align-items: center;">
-                    <input id="searchInput" type="text" name="workoutName" placeholder="Search..." required class="search-input">
-                    <button type="submit" class="custom-search-button">Search</button>
+                    <input id="searchInput" type="text" name="workoutName" placeholder="Search..." required class="search-input"> <!-- Search input field -->
+                    <button type="submit" class="custom-search-button">Search</button> <!-- Search button -->
                 </form>
             </div>
 
+            <!-- Header content -->
             <div id="workoutsList">
-                <!-- Workouts will be displayed here -->
+                <!-- Placeholder for displaying workouts -->
             </div>
-                <div class="header-content">
-                    <button class="icon-btn">
-                        <i class="ri-notification-4-line"></i>
-                    </button>
-                    <i class=""></i>
+            <div class="header-content">
+                <button class="icon-btn">
+                    <i class="ri-notification-4-line"></i> <!-- Notification icon -->
+                </button>
+                <i class=""></i> <!-- Placeholder icon -->
                 <a asp-controller="User" asp-action="Logout" class="btn">
-                        <i class="ri-home-line"></i>
-                        <div class="btn-text">Logout</div>
-                    </a>
-                </div>
-            </div>
-            <div class="">
-                <h1></h1>
-                <a href="#" class="btn">
-                    <i class=""></i>
-                    <div class="text"></div>
+                    <i class="ri-home-line"></i>
+                    <div class="btn-text">Logout</div> <!-- Logout button -->
                 </a>
             </div>
-            <div class="feed">
-                <h1>Categories</h1>
-                <div class="feed-text">
-                    <h2></h2>
-                    <span></span>
-                </div>
-            </div>
-            <div class="main-categories">
-            <a asp-controller="Workout" asp-action="StrengthView" class="post-box">
-                <h1>Strength</h1>
-                <img src="~/images/strength.jpg" alt="">
+        </div>
+
+        <!-- Additional content sections -->
+        <div class="">
+            <h1></h1> <!-- Placeholder heading -->
+            <a href="#" class="btn">
+                <i class=""></i> <!-- Placeholder icon -->
+                <div class="text"></div> <!-- Placeholder text -->
             </a>
-            <a asp-controller="Workout" asp-action="HIITView" class="post-box">
-                <h1>HIIT</h1>
-                <img src="~/images/hiit.jpg" alt="">
-            </a>
-            <a asp-controller="Workout" asp-action="FunctionalView" class="post-box">
-                <h1>Functional</h1>
-                <img src="~/images/functional.jpg" alt="">
-            </a>
-            <a asp-controller="Workout" asp-action="FlexibilityView" class="post-box">
-                <h1>Flexibility</h1>
-                <img src="~/images/flexibility.jpg" alt="">
-            </a>
+        </div>
+        <div class="feed">
+            <h1>Categories</h1> <!-- Heading for categories section -->
+            <div class="feed-text">
+                <h2></h2> <!-- Placeholder heading -->
+                <span></span> <!-- Placeholder text -->
             </div>
         </div>
-    <script src="~/js/search.js"></script>
-    </body>
+
+        <!-- Main categories section -->
+        <div class="main-categories">
+            <a asp-controller="Workout" asp-action="StrengthView" class="post-box">
+                <h1>Strength</h1> <!-- Category heading -->
+                <img src="~/images/strength.jpg" alt=""> <!-- Category image -->
+            </a>
+            <a asp-controller="Workout" asp-action="HIITView" class="post-box">
+                <h1>HIIT</h1> <!-- Category heading -->
+                <img src="~/images/hiit.jpg" alt=""> <!-- Category image -->
+            </a>
+            <a asp-controller="Workout" asp-action="FunctionalView" class="post-box">
+                <h1>Functional</h1> <!-- Category heading -->
+                <img src="~/images/functional.jpg" alt=""> <!-- Category image -->
+            </a>
+            <a asp-controller="Workout" asp-action="FlexibilityView" class="post-box">
+                <h1>Flexibility</h1> <!-- Category heading -->
+                <img src="~/images/flexibility.jpg" alt=""> <!-- Category image -->
+            </a>
+        </div>
+    </div>
+
+    <script src="~/js/search.js"></script> <!-- Linking to custom JavaScript file -->
+</body>
 </html>

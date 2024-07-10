@@ -1,20 +1,20 @@
-﻿using System;
+﻿using System;  // Import necessary namespaces
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using FitnessFormulaMVP.Models;
+using FitnessFormulaMVP.Models;  // Import ErrorViewModel, UserModel, and LoginModel from the Models namespace
 
 namespace FitnessFormulaMVP.Controllers
 {
     public class UserController : Controller
     {
-        private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:7076/api/";
+        private readonly HttpClient _httpClient;  // HTTP client instance for making requests to the API
+        private readonly string _baseUrl = "https://localhost:7076/api/";  // Base URL of the API
 
-        public UserController()
+        public UserController()  // Constructor initializing HttpClient and setting base address and headers
         {
             _httpClient = new HttpClient
             {
@@ -24,20 +24,20 @@ namespace FitnessFormulaMVP.Controllers
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public IActionResult Register()
+        public IActionResult Register()  // Action method for displaying registration view
         {
-            return View();
+            return View();  // Return Register view
         }
 
-        public IActionResult Login()
+        public IActionResult Login()  // Action method for displaying login view
         {
-            return View();
+            return View();  // Return Login view
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(UserModel model)
+        public async Task<IActionResult> Register(UserModel model)  // POST action method for user registration
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)  // Validate model state
             {
                 try
                 {
@@ -51,7 +51,7 @@ namespace FitnessFormulaMVP.Controllers
                     // Check for successful response
                     response.EnsureSuccessStatusCode(); // Throws on error status
 
-                    // Redirect to the Login action after successful registration
+                    // Redirect to the Home/Index action after successful registration
                     return RedirectToAction("Index", "Home");
                 }
                 catch (HttpRequestException ex)
@@ -67,9 +67,9 @@ namespace FitnessFormulaMVP.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model)  // POST action method for user login
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)  // Validate model state
             {
                 try
                 {
@@ -107,7 +107,7 @@ namespace FitnessFormulaMVP.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Settings()
+        public async Task<IActionResult> Settings()  // Action method for displaying user settings
         {
             var username = HttpContext.Session.GetString("Username");
 
@@ -134,9 +134,9 @@ namespace FitnessFormulaMVP.Controllers
             }
         }
 
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout()  // Action method for logging out user
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");  // Redirect to Home/Index action
         }
     }
 }

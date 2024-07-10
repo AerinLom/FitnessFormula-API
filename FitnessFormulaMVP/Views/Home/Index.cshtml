@@ -1,98 +1,103 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
-    <title>FitnessFormula | Sign Up & Sign In</title>
+    <meta charset="UTF-8"> <!-- Setting the character encoding -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Setting compatibility mode for IE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport settings -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Linking to Boxicons CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Linking to custom CSS -->
+    <title>FitnessFormula | Sign Up & Sign In</title> <!-- Setting the title of the page -->
 </head>
 <body>
     <div class="wrapper">
+        <!-- Navigation bar -->
         <nav class="nav">
             <div class="nav-logo">
-                <img src="/images/NewFitnessFormula.png" alt="New Fitness Formula Logo" />
+                <img src="/images/NewFitnessFormula.png" alt="New Fitness Formula Logo" /> <!-- Logo image -->
             </div>
             <div class="nav-menu" id="navMenu">
                 <ul>
-                    <li><a href="#" class="link active">Login</a></li>
+                    <li><a href="#" class="link active">Login</a></li> <!-- Menu item for Login -->
                 </ul>
             </div>
             <div class="nav-button">
-                <button class="btn white-btn" id="loginBtn" onclick="showLoginForm()">Sign In</button>
-                <button class="btn" id="registerBtn" onclick="showRegisterForm()">Sign Up</button>
+                <button class="btn white-btn" id="loginBtn" onclick="showLoginForm()">Sign In</button> <!-- Sign In button -->
+                <button class="btn" id="registerBtn" onclick="showRegisterForm()">Sign Up</button> <!-- Sign Up button -->
             </div>
             <div class="nav-menu-btn">
-                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i> <!-- Menu toggle icon -->
             </div>
         </nav>
-        <!----------------------------- Form box ----------------------------------->
+
+        <!-- Form box for login and registration -->
         <div class="form-box">
-            <!------------------- login form -------------------------->
+            <!-- Login form -->
             <div class="login-container" id="login">
                 <div class="top">
-                    <span>Don't have an account? <a href="#" onclick="showRegisterForm()">Sign Up</a></span>
-                    <header>Login</header>
+                    <span>Don't have an account? <a href="#" onclick="showRegisterForm()">Sign Up</a></span> <!-- Link to switch to registration form -->
+                    <header>Login</header> <!-- Section header -->
                 </div>
                 <form asp-controller="User" asp-action="Login" method="post" id="loginForm">
                     <div class="input-box">
-                        <input type="text" class="input-field" placeholder="Username" id="Username" name="Username" required>
-                        <i class="bx bx-user"></i>
+                        <input type="text" class="input-field" placeholder="Username" id="Username" name="Username" required> <!-- Username input field -->
+                        <i class="bx bx-user"></i> <!-- Icon for username input -->
                     </div>
                     <div class="input-box">
-                        <input type="password" class="input-field" placeholder="Password" id="Password" name="Password" required>
-                        <i class="bx bx-lock-alt"></i>
+                        <input type="password" class="input-field" placeholder="Password" id="Password" name="Password" required> <!-- Password input field -->
+                        <i class="bx bx-lock-alt"></i> <!-- Icon for password input -->
                     </div>
                     <div class="input-box">
-                        <input type="submit" class="submit" value="Sign In">
+                        <input type="submit" class="submit" value="Sign In"> <!-- Submit button for signing in -->
                     </div>
                     <div class="two-col">
                         <div class="one">
-                            <input type="checkbox" id="login-check">
+                            <input type="checkbox" id="login-check"> <!-- Checkbox for "Remember Me" -->
                             <label for="login-check"> Remember Me</label>
                         </div>
                         <div class="two">
-                            <label><a href="#">Forgot password?</a></label>
+                            <label><a href="#">Forgot password?</a></label> <!-- Link for forgot password -->
                         </div>
                     </div>
                 </form>
             </div>
-            <!------------------- registration form -------------------------->
+
+            <!-- Registration form -->
             <div class="register-container" id="register">
                 <div class="top">
-                    <span>Have an account? <a href="#" onclick="showLoginForm()">Login</a></span>
-                    <header>Sign Up</header>
+                    <span>Have an account? <a href="#" onclick="showLoginForm()">Login</a></span> <!-- Link to switch to login form -->
+                    <header>Sign Up</header> <!-- Section header -->
                 </div>
                 <form asp-controller="User" asp-action="Register" method="post" id="registerForm">
                     <div class="input-box">
-                        <input type="text" class="input-field" placeholder="Username" id="Username" name="Username" required>
-                        <i class="bx bx-user"></i>
+                        <input type="text" class="input-field" placeholder="Username" id="Username" name="Username" required> <!-- Username input field -->
+                        <i class="bx bx-user"></i> <!-- Icon for username input -->
                     </div>
                     <div class="input-box">
-                        <input type="email" class="input-field" placeholder="Email" id="Email" name="Email" required>
-                        <i class="bx bx-envelope"></i>
+                        <input type="email" class="input-field" placeholder="Email" id="Email" name="Email" required> <!-- Email input field -->
+                        <i class="bx bx-envelope"></i> <!-- Icon for email input -->
                     </div>
                     <div class="input-box">
-                        <input type="password" class="input-field" placeholder="Password" id="password" name="Password" required>
-                        <i class="bx bx-lock-alt"></i>
+                        <input type="password" class="input-field" placeholder="Password" id="password" name="Password" required> <!-- Password input field -->
+                        <i class="bx bx-lock-alt"></i> <!-- Icon for password input -->
                     </div>
                     <div class="input-box">
-                        <button type="submit" class="submit">Sign Up</button>
+                        <button type="submit" class="submit">Sign Up</button> <!-- Submit button for signing up -->
                     </div>
                     <div class="two-col">
                         <div class="one">
-                            <input type="checkbox" id="register-check">
+                            <input type="checkbox" id="register-check"> <!-- Checkbox for "Remember Me" -->
                             <label for="register-check"> Remember Me</label>
                         </div>
                         <div class="two">
-                            <label><a href="#">Terms & conditions</a></label>
+                            <label><a href="#">Terms & conditions</a></label> <!-- Link for terms & conditions -->
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for menu toggle and form switch -->
     <script>
         function myMenuFunction() {
             var i = document.getElementById("navMenu");
@@ -109,21 +114,21 @@
         var y = document.getElementById("register");
 
         function showLoginForm() {
-            x.style.left = "4px";
-            y.style.right = "-520px";
-            a.className += " white-btn";
-            b.className = "btn";
-            x.style.opacity = 1;
-            y.style.opacity = 0;
+            x.style.left = "4px"; <!-- Positioning login form -->
+            y.style.right = "-520px"; <!-- Hiding registration form -->
+            a.className += " white-btn"; <!-- Applying style to login button -->
+            b.className = "btn"; <!-- Resetting style of register button -->
+            x.style.opacity = 1; <!-- Making login form visible -->
+            y.style.opacity = 0; <!-- Making registration form invisible -->
         }
 
         function showRegisterForm() {
-            x.style.left = "-510px";
-            y.style.right = "5px";
-            a.className = "btn";
-            b.className += " white-btn";
-            x.style.opacity = 0;
-            y.style.opacity = 1;
+            x.style.left = "-510px"; <!-- Hiding login form -->
+            y.style.right = "5px"; <!-- Positioning registration form -->
+            a.className = "btn"; <!-- Resetting style of login button -->
+            b.className += " white-btn"; <!-- Applying style to register button -->
+            x.style.opacity = 0; <!-- Making login form invisible -->
+            y.style.opacity = 1; <!-- Making registration form visible -->
         }
     </script>
 </body>
