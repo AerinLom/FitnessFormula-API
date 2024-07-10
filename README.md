@@ -1,7 +1,7 @@
 FitnessFormula
 
-![dashboard-image](dashboard-1.png)
-![custom-workout](create-workout.png)
+![dashboard-image](README-images/dashboard-1.png)
+![custom-workout](README-images/create-workout.png)
 
 Introduction:
 
@@ -21,33 +21,44 @@ Installation:
 
 To get a copy locally, follow these steps:
 
-1. Clone the repository
+# 1. Clone the repository
+git clone https://github.com/AerinLom/FitnessFormula-API.git
 
-- https://github.com/AerinLom/FitnessFormula-API.git
+# 2. Navigate to the project's directory
+cd FitnessFormula-API/FitnessFormulaMVP
 
-2. Navigate to the project's directory on your terminal
+# 3. Download and install the .NET 8.0 SDK
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh --channel 8.0 --install-dir /usr/share/dotnet
 
-- cd FitnessFormula-API
+# 4. Add the .NET SDK to the PATH
+export PATH=$PATH:/usr/share/dotnet
 
-3. Make sure you have the npm package installed
+# 5. Restore the project dependencies
+dotnet restore
 
-- npm install
+# 6. Build the project
+dotnet build
 
-4. Start the development server
+# 7. Publish the project
+dotnet publish -c Release -o /home/ubuntu/publish/FitnessFormulaMVP
 
-- npm start
+# 8. Run the application
+dotnet /home/ubuntu/publish/FitnessFormulaMVP/FitnessFormulaMVP.dll
+
 
 Usage:
 
-1. From the landing page, click signup/login to create an account.
+1. From the landing page cick get started, then click signup/login to create an account.
 
-2. After account creation login with the credentials you provided on signup.
+2. After account creation, login with the credentials you provided on signup.
 
-3. From the dashboard, navigate to 'New Workout'.
+3. Find workouts using the search functionality or create custom workouts using "Create a workout".
 
-4. You will be able to create a custom workout with the desired exercises, volume and intensity.
+4. To save workouts, click into a workout and then save.
 
-5. Click create workout and navigate to the 'My Workouts' section where you will find your saved custom workout.
+5. To view saved workouts, navigate to the 'My Workouts' section.
 
 Contributions:
 
